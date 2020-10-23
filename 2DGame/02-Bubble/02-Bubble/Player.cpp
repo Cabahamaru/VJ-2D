@@ -132,6 +132,8 @@ void Player::update(int deltaTime)
 		}
 	}
 
+
+
 	else
 	{
 		if(sprite->animation() == MOVE_LEFT)
