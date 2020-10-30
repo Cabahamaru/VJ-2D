@@ -5,7 +5,7 @@
 #include "ShaderProgram.h"
 #include "Texture.h"
 #include "TexturedQuad.h"
-#include "Text.h"
+//#include "Text.h"
 
 #define CAMERA_WIDTH 640
 #define CAMERA_HEIGHT 480
