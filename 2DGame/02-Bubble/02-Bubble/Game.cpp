@@ -6,16 +6,18 @@
 void Game::init()
 {
 	bPlay = true;
+	state = 3;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
-	//scene.init();
 	menu.init();
 }
 
 bool Game::update(int deltaTime)
 {
-	//scene.update(deltaTime);
-	menu.update(deltaTime);
+	if (state == 3) menu.update(deltaTime);
+	else if (state == 0) scene.update(deltaTime);
+	//estado instrucciones
+	//estado creditos
 	
 	return bPlay;
 }
@@ -23,8 +25,11 @@ bool Game::update(int deltaTime)
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//scene.render();
-	menu.render();
+
+	if (state == 3) menu.render();
+	else if (state == 0) scene.render();
+	//estado instrucciones
+	//estado creditos
 }
 
 void Game::keyPressed(int key)
@@ -78,7 +83,7 @@ void Game::setSpecialKey(int key) {
 void Game::newaction(int act)
 {
 
-	estado = act;
+	state = act;
 	if (act == 3) {
 		menu.init();
 	}
@@ -86,9 +91,10 @@ void Game::newaction(int act)
 		scene.init();
 	}
 	else if (act == 1) {
-
+		//estado instrucciones
 	}
 	else {
+		//estado creditos
 		//glClearColor(1.f, 1.f, 1.f, 1.0f);
 	}
 }
