@@ -5,7 +5,7 @@
 #include "ShaderProgram.h"
 #include "Texture.h"
 #include "TexturedQuad.h"
-//#include "Text.h"
+#include "Text.h"
 
 #define CAMERA_WIDTH 640
 #define CAMERA_HEIGHT 480
@@ -20,7 +20,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-	bool jugar();
+
 private:
 	void initShaders();
 	void nextLevel();
@@ -29,7 +29,7 @@ private:
 	int accion;
 	//Text texto;
 	Texture imgFondo, imgCursor;
-	TexturedQuad* fondo;
+	TexturedQuad *fondo, *cursor;
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
