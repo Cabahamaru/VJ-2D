@@ -62,7 +62,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 		{
 			posPlayer.y -= 4;
-			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
 			{
 				posPlayer.y += 4;
 				sprite->changeAnimation(MOVE_UP);
@@ -91,7 +91,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 		{
 			posPlayer.y -= 4;
-			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
 			{
 				posPlayer.y += 4;
 				sprite->changeAnimation(MOVE_UP);
@@ -113,7 +113,7 @@ void Player::update(int deltaTime)
 		if (sprite->animation() != MOVE_UP)
 			sprite->changeAnimation(MOVE_UP);
 		posPlayer.y -= 4;
-		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
 		{
 			posPlayer.y += 4;
 			sprite->changeAnimation(MOVE_UP);

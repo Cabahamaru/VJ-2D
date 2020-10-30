@@ -5,17 +5,23 @@
 #include "Game.h"
 
 
+
+
 #define SCREEN_X 32
 #define SCREEN_Y 32
 
 #define INIT_PLAYER_X_TILES 10
 #define INIT_PLAYER_Y_TILES 10
 
+#define INIT_BALL_X_TILES 10
+#define INIT_BALL_Y_TILES 9
+
 
 Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
+	ball = NULL;
 }
 
 Scene::~Scene()
@@ -24,6 +30,8 @@ Scene::~Scene()
 		delete map;
 	if(player != NULL)
 		delete player;
+	if (ball != NULL)
+		delete ball;
 }
 
 
@@ -36,13 +44,21 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	
+	ball = new Ball();
+	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
+	ball->setTileMap(map);
+	
 	currentTime = 0.0f;
 }
+
 
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	ball->update(deltaTime);
 }
 
 void Scene::render()
@@ -57,6 +73,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->render();
 	player->render();
+	ball->render();
 }
 
 void Scene::initShaders()
