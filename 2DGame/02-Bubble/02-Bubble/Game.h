@@ -4,7 +4,9 @@
 
 #include "Scene.h"
 #include "Menu.h"
+#include <irrKlang.h>
 
+using namespace irrklang;
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
@@ -52,6 +54,7 @@ private:
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
 	int state;
+	ISoundEngine* SoundEngine;
 };
 
 
