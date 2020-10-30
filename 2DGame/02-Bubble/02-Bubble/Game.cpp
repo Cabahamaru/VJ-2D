@@ -7,12 +7,15 @@ void Game::init()
 {
 	bPlay = true;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-	scene.init();
+
+	//scene.init();
+	menu.init();
 }
 
 bool Game::update(int deltaTime)
 {
-	scene.update(deltaTime);
+	//scene.update(deltaTime);
+	menu.update(deltaTime);
 	
 	return bPlay;
 }
@@ -20,7 +23,8 @@ bool Game::update(int deltaTime)
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	scene.render();
+	//scene.render();
+	menu.render();
 }
 
 void Game::keyPressed(int key)
@@ -65,6 +69,28 @@ bool Game::getKey(int key) const
 bool Game::getSpecialKey(int key) const
 {
 	return specialKeys[key];
+}
+
+void Game::setSpecialKey(int key) {
+	specialKeyReleased(key);
+}
+
+void Game::newaction(int act)
+{
+
+	estado = act;
+	if (act == 3) {
+		menu.init();
+	}
+	else if (act == 0) {
+		scene.init();
+	}
+	else if (act == 1) {
+
+	}
+	else {
+		//glClearColor(1.f, 1.f, 1.f, 1.0f);
+	}
 }
 
 
