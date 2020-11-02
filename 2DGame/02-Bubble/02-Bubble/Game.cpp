@@ -1,10 +1,10 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "Game.h"
-#include <irrKlang.h>
+//#include <irrKlang.h>
 #include <iostream>
 
-using namespace irrklang;
+//using namespace irrklang;
 
 
 void Game::init()
