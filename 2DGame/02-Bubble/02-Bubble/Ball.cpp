@@ -7,6 +7,8 @@
 #include "Player.h"
 
 bool Start = false;
+int yaux = -2;
+int xaux = -2;
 
 void Ball::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
@@ -33,11 +35,28 @@ void Ball::update(int deltaTime)
 	}*/
 	if (Start) {
 
-		posBall.y -= 2;
+		posBall.y += yaux;
+		//posBall.x += xaux;
+
 		if (map->collisionMoveUp(posBall, glm::ivec2(32, 32), &posBall.y))
 		{
-			posBall.y += 2;
+			yaux = -yaux;
 		}
+		if (map->collisionMoveDown(posBall, glm::ivec2(32, 32), &posBall.y))
+		{
+			yaux = -yaux;
+		}
+		if (map->collisionMoveLeft(posBall, glm::ivec2(32, 32)))
+		{
+			//xaux = -xaux;
+
+		}
+		if (map->collisionMoveRight(posBall, glm::ivec2(32, 32)))
+		{
+			//xaux = -xaux;
+		}
+		
+
 	}
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBall.x), float(tileMapDispl.y + posBall.y)));
