@@ -8,7 +8,7 @@
 
 
 void Game::init()
-{
+{ 
 	bPlay = true;
 	state = 3;
 	/*

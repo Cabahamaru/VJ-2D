@@ -27,7 +27,7 @@ private:
 
 private:
 	int accion;
-	//Text texto;
+	bool cur1;
 	Texture imgFondo, imgCursor;
 	TexturedQuad *fondo, *cursor;
 	ShaderProgram texProgram;

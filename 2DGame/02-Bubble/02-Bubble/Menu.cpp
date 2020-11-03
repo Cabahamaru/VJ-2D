@@ -8,6 +8,8 @@
 #define SCREEN_X 32
 #define SCREEN_Y 32
 
+int contador = 0;
+
 Menu::Menu()
 {
 
@@ -32,15 +34,27 @@ void Menu::init()
 	glm::vec2 texCoords2[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	cursor = TexturedQuad::createTexturedQuad(geom2, texCoords2, texProgram);
 	imgCursor.loadFromFile("images/cursor1.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	cur1 = true;
 
 	projection = glm::ortho(0.f, float(CAMERA_WIDTH - 1), float(CAMERA_HEIGHT - 1), 0.f);
-	//texto.init("fonts/emulogic.ttf");
 
 }
 
 void Menu::update(int deltaTime)
 {
 	currentTime += deltaTime;
+	++contador;
+	if (contador > 30) {
+		if (cur1) {
+			imgCursor.loadFromFile("images/cursor2.png", TEXTURE_PIXEL_FORMAT_RGBA);
+			cur1 = false;
+		}
+		else {
+			imgCursor.loadFromFile("images/cursor1.png", TEXTURE_PIXEL_FORMAT_RGBA);
+			cur1 = true;
+		}
+		contador = 0;
+	}
 
 	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
 		Game::instance().setSpecialKey(GLUT_KEY_DOWN);
@@ -73,6 +87,7 @@ void Menu::update(int deltaTime)
 	}
 
 	if (Game::instance().getKey(13)) {
+		Game::instance().keyReleased(13);
 		Game::instance().newaction(accion);
 	}
 }
