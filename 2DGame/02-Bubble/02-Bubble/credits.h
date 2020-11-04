@@ -26,7 +26,7 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
-
+	bool ent;
 	Texture creditsImage;
 	TexturedQuad* fondo;
 };
