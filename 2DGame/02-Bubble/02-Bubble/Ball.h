@@ -5,6 +5,7 @@
 
 #include "Sprite.h"
 #include "TileMap.h"
+#include "Player.h"
 class Ball
 {
 public:
@@ -15,13 +16,16 @@ public:
 	void setTileMap(TileMap* tileMap);
 	void setPosition(const glm::vec2& pos);
 
+	void CollisionWithPlayer();
+
 private:
 	glm::ivec2 tileMapDispl, posBall;
 	int startY;
 	Texture spritesheet;
 	Sprite* sprite;
 	TileMap* map;
+	Player* player;
 };
 
 
-#endif // _PLAYER_INCLUDE
+#endif // _BALL_INCLUDE
