@@ -33,10 +33,12 @@ public:
 	bool collisionMoveDown(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const;
 	bool collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const;
 
-	bool collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& size) const;
-	bool collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& size) const;
-	bool collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const;
-	bool collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY) const;
+	bool collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& size) ;
+	bool collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& size) ;
+	bool collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY) ;
+	bool collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY) ;
+
+	void setShaderProgram(ShaderProgram program);
 
 
 	
@@ -53,6 +55,7 @@ private:
 	Texture tilesheet;
 	glm::vec2 tileTexSize;
 	int *map;
+	ShaderProgram texProgram;
 
 };
 

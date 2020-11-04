@@ -4,6 +4,8 @@
 #include <vector>
 #include "TileMap.h"
 
+#define SCREEN_X 32
+#define SCREEN_Y 32
 
 using namespace std;
 
@@ -11,7 +13,6 @@ using namespace std;
 TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
 	TileMap *map = new TileMap(levelFile, minCoords, program);
-	
 	return map;
 }
 
@@ -117,14 +118,14 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 				bool aux = true;
 				if (tile == 10) {
 					nTiles++;
-					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize);
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize/2);
 					texCoordTile[0] = glm::vec2(0.75f,0.0f);
-					texCoordTile[1] = glm::vec2(1.f, 0.25f);
+					texCoordTile[1] = glm::vec2(1.f, 0.125f);
 					aux = true;
 				}
 				else if (tile == 1) {
 					nTiles++;
-					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize);
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize/2);
 					texCoordTile[0] = glm::vec2(0.0f, 0.0f);
 					texCoordTile[1] = glm::vec2(0.25f, 0.125f) ;
 					aux = false;
@@ -148,7 +149,7 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 				else {
 					// Non-empty tile
 					nTiles++;
-					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize);
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize/2);
 					texCoordTile[0] = glm::vec2(float((tile - 1) % 2) / tilesheetSize.x, float((tile - 1) / 2) / tilesheetSize.y);
 					texCoordTile[1] = texCoordTile[0] + tileTexSize;
 					aux = true;
@@ -161,14 +162,14 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 					vertices.push_back(texCoordTile[0].x); vertices.push_back(texCoordTile[0].y);
 					vertices.push_back(posTile.x + blockSize); vertices.push_back(posTile.y);
 					vertices.push_back(texCoordTile[1].x); vertices.push_back(texCoordTile[0].y);
-					vertices.push_back(posTile.x + blockSize); vertices.push_back(posTile.y + blockSize);
+					vertices.push_back(posTile.x + blockSize); vertices.push_back(posTile.y + blockSize/2);
 					vertices.push_back(texCoordTile[1].x); vertices.push_back(texCoordTile[1].y);
 					// Second triangle
 					vertices.push_back(posTile.x); vertices.push_back(posTile.y);
 					vertices.push_back(texCoordTile[0].x); vertices.push_back(texCoordTile[0].y);
-					vertices.push_back(posTile.x + blockSize); vertices.push_back(posTile.y + blockSize);
+					vertices.push_back(posTile.x + blockSize); vertices.push_back(posTile.y + blockSize/2);
 					vertices.push_back(texCoordTile[1].x); vertices.push_back(texCoordTile[1].y);
-					vertices.push_back(posTile.x); vertices.push_back(posTile.y + blockSize);
+					vertices.push_back(posTile.x); vertices.push_back(posTile.y + blockSize/2);
 					vertices.push_back(texCoordTile[0].x); vertices.push_back(texCoordTile[1].y);
 				}
 				
@@ -194,8 +195,8 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) c
 	int x, y0, y1;
 	
 	x = pos.x / tileSize;
-	y0 = pos.y / tileSize;
-	y1 = (pos.y + size.y - 1) / tileSize;
+	y0 = pos.y / (tileSize/2);
+	y1 = (pos.y + size.y - 1) / (tileSize/2);
 	for(int y=y0; y<=y1; y++)
 	{
 		if(map[y*mapSize.x+x] == 10)
@@ -210,8 +211,8 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) 
 	int x, y0, y1;
 	
 	x = (pos.x + size.x - 1) / tileSize;
-	y0 = pos.y / tileSize;
-	y1 = (pos.y + size.y - 1) / tileSize;
+	y0 = pos.y / (tileSize/2);
+	y1 = (pos.y + size.y - 1) / (tileSize/2);
 	for(int y=y0; y<=y1; y++)
 	{
 		if(map[y*mapSize.x+x] == 10)
@@ -227,16 +228,12 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	
 	x0 = pos.x / tileSize;
 	x1 = (pos.x + size.x - 1) / tileSize;
-	y = (pos.y + size.y - 1) / tileSize;
+	y = (pos.y + size.y - 1) / (tileSize/2);
 	for(int x=x0; x<=x1; x++)
 	{
 		if(map[y*mapSize.x+x] == 10)
 		{
-			if(*posY - tileSize * y + size.y <= 4)
-			{
-				*posY = tileSize * y - size.y;
-				return true;
-			}
+			return true;
 		}
 	}
 	
@@ -247,25 +244,181 @@ bool TileMap::collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int
 {
 	int x0, x1, y;
 
-	x0 = pos.x / tileSize;
-	x1 = (pos.x + size.x - 1) / tileSize;
-	y = (pos.y) / tileSize;
+	x0 = (pos.x) / tileSize;
+	x1 = (pos.x  + size.x - 1) / tileSize;
+	y = ((pos.y) / (tileSize/2));
 	for (int x = x0; x <= x1; x++)
 	{
-		if (map[y * mapSize.x + x] == 10)
+		if(map[y * mapSize.x + x] == 10)
 		{
 			if (*posY + tileSize * y + size.y >= 4)
 			{
-				*posY = tileSize * y + size.y;
 				return true;
 			}
 		}
+		
 	}
 
 	return false;
 }
 
 
+bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& size)
+{
+	int x, y0, y1;
+
+	x = pos.x / tileSize;
+	y0 = (pos.y +4)/ (tileSize/2);
+	y1 = (pos.y -4 + size.y - 1) / (tileSize/2);
+	for (int y = y0; y <= y1; y++)
+	{
+		if (map[y * mapSize.x + x] == 10)
+			return true;
+		if (map[y * mapSize.x + x] == 1)
+		{
+			map[y * mapSize.x + x] = 0;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 2)
+		{
+			map[y * mapSize.x + x] = 1;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 3)
+		{
+			map[y * mapSize.x + x] = 2;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& size)
+{
+	int x, y0, y1;
+
+	x = (pos.x + size.x - 1) / tileSize;
+	y0 = (pos.y + 4) / (tileSize/2);
+	y1 = (pos.y - 4 + size.y - 1) / (tileSize/2);
+	for (int y = y0; y <= y1; y++)
+	{
+		if (map[y * mapSize.x + x] == 10)
+			return true;
+		if (map[y * mapSize.x + x] == 1) 
+		{
+			map[y * mapSize.x + x] = 0;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		
+		if (map[y * mapSize.x + x] == 2)
+		{
+			map[y * mapSize.x + x] = 1;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 3)
+		{
+			map[y * mapSize.x + x] = 2;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+			
+	}
+
+	return false;
+}
+
+bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY)
+{
+	int x0, x1, y;
+
+	x0 = (pos.x +4) / tileSize;
+	x1 = ( (pos.x -4) + size.x - 1) / tileSize;
+	y = (pos.y + size.y - 1) / (tileSize/2);
+	int yaux = (pos.y + size.y - 1) / tileSize;
+	//int yaux = ((pos.y) / (tileSize));
+	for (int x = x0; x <= x1; x++)
+	{
+		if (map[y * mapSize.x + x] == 1)
+		{
+			map[y * mapSize.x + x] = 0;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+			/*if (*posY - tileSize * y + size.y <= 4)
+			{
+				//*posY = tileSize * y - size.y;
+				return true;
+			}*/
+		}
+		if (map[y * mapSize.x + x] == 10)
+		{
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 2)
+		{
+			map[y * mapSize.x + x] = 1;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 3)
+		{
+			map[y * mapSize.x + x] = 2;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY)
+{
+	int x0, x1, y;
+
+	x0 = (pos.x + 4) / tileSize;
+	x1 = (pos.x - 4 + size.x - 1) / tileSize;
+	y = ((pos.y) / (tileSize / 2));
+	int yaux = ((pos.y) / (tileSize));
+	for (int x = x0; x <= x1; x++)
+	{
+		if (map[y * mapSize.x + x] == 1)
+		{
+			map[y * mapSize.x + x] = 0;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 10)
+		{
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 2)
+		{
+			map[y * mapSize.x + x] = 1;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 3)
+		{
+			map[y * mapSize.x + x] = 2;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
+
+void TileMap::setShaderProgram(ShaderProgram program) {
+	texProgram = program;
+}
 
 
 
