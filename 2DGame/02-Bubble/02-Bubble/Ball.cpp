@@ -53,10 +53,8 @@ void Ball::update(int deltaTime)
 			direction.x = -direction.x;
 
 		}
-		/*else 
-		{
-			CollisionWithPlayer();
-		}*/
+		else CollisionWithPlayer();
+
 		/*if (map->collisionMoveRightBall(posBall, glm::ivec2(32, 32)))
 		{
 			direction.x = -direction.x;
@@ -108,4 +106,8 @@ void Ball::CollisionWithPlayer()
 		}
 
 	}
+}
+
+void Ball::setPlayer(Player* p) {
+	player = p;
 }

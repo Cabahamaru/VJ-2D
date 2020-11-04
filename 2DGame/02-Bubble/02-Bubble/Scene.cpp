@@ -50,6 +50,7 @@ void Scene::init()
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
 	ball->setTileMap(map);
+	ball->setPlayer(player);
 	
 	currentTime = 0.0f;
 }
