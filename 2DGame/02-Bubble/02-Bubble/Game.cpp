@@ -31,7 +31,7 @@ bool Game::update(int deltaTime)
 	if (state == 3) menu.update(deltaTime);
 	else if (state == 0) scene.update(deltaTime);
 	//estado instrucciones
-	//estado creditos
+	else if (state == 2) credits.update(deltaTime);
 	
 	return bPlay;
 }
@@ -43,7 +43,7 @@ void Game::render()
 	if (state == 3) menu.render();
 	else if (state == 0) scene.render();
 	//estado instrucciones
-	//estado creditos
+	else if (state == 2) credits.render();
 }
 
 void Game::keyPressed(int key)
@@ -108,8 +108,7 @@ void Game::newaction(int act)
 		//estado instrucciones
 	}
 	else {
-		//estado creditos
-		//glClearColor(1.f, 1.f, 1.f, 1.0f);
+		credits.init();
 	}
 }
 
