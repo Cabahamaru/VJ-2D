@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Menu.h"
 #include "credits.h"
+#include "instruccions.h"
 //#include <irrKlang.h>
 
 //using namespace irrklang;
@@ -53,6 +54,7 @@ private:
 	Scene scene;                      // Scene to render
 	Menu menu;
 	Credits credits;
+	Instruccions inst;
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
 	int state;

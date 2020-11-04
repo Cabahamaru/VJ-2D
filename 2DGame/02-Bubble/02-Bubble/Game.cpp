@@ -30,7 +30,7 @@ bool Game::update(int deltaTime)
 {
 	if (state == 3) menu.update(deltaTime);
 	else if (state == 0) scene.update(deltaTime);
-	//estado instrucciones
+	else if (state == 1) inst.update(deltaTime);
 	else if (state == 2) credits.update(deltaTime);
 	
 	return bPlay;
@@ -42,7 +42,7 @@ void Game::render()
 
 	if (state == 3) menu.render();
 	else if (state == 0) scene.render();
-	//estado instrucciones
+	else if (state == 1) inst.render();
 	else if (state == 2) credits.render();
 }
 
@@ -105,7 +105,7 @@ void Game::newaction(int act)
 		scene.init();
 	}
 	else if (act == 1) {
-		//estado instrucciones
+		inst.init();
 	}
 	else {
 		credits.init();
