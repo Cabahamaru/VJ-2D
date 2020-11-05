@@ -44,10 +44,6 @@ void Ball::update(int deltaTime)
 		{
 			direction.y = -direction.y;
 		}
-		/*if (map->collisionMoveDownBall(posBall, glm::ivec2(32, 32), &posBall.y))
-		{
-			direction.y = -direction.y;
-		}*/
 		else if (map->collisionMoveLeftBall(posBall, glm::ivec2(32, 32)) || map->collisionMoveRightBall(posBall, glm::ivec2(32, 32)))
 		{
 			direction.x = -direction.x;
@@ -55,10 +51,6 @@ void Ball::update(int deltaTime)
 		}
 		else CollisionWithPlayer();
 
-		/*if (map->collisionMoveRightBall(posBall, glm::ivec2(32, 32)))
-		{
-			direction.x = -direction.x;
-		}*/
 
 	}
 
