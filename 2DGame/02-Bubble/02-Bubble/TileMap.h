@@ -39,6 +39,7 @@ public:
 	bool collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY) ;
 
 	bool ColissionWithKey(int y, int x);
+	bool BreakBrick(int y, int x);
 
 	void setShaderProgram(ShaderProgram program);
 

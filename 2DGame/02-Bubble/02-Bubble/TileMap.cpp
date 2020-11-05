@@ -276,25 +276,23 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 			return true;
 		if (map[y * mapSize.x + x] == 1)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 4)
+		{
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			ColissionWithKey(y, x);
+			return ColissionWithKey(y, x);
 		}
 	}
 
@@ -314,26 +312,24 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 			return true;
 		if (map[y * mapSize.x + x] == 1) 
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 4)
+		{
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			ColissionWithKey(y, x);
+			return ColissionWithKey(y, x);
 		}
 			
 	}
@@ -352,9 +348,7 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 	{
 		if (map[y * mapSize.x + x] == 1)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 10)
 		{
@@ -362,19 +356,19 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		}
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 4)
+		{
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			ColissionWithKey(y, x);
+			return ColissionWithKey(y, x);
 		}
 
 	}
@@ -394,9 +388,7 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 	{
 		if (map[y * mapSize.x + x] == 1)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 10)
 		{
@@ -404,24 +396,32 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		}
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			return BreakBrick(y, x);
 		}
+		if (map[y * mapSize.x + x] == 4)
+		{
+			return BreakBrick(y, x);
+		}
+		
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			ColissionWithKey(y, x);
+			return ColissionWithKey(y, x);
 		}
 
 	}
 
 	return false;
+}
+
+bool TileMap::BreakBrick(int y, int x)
+{
+	map[y * mapSize.x + x] = 0;
+	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	return true;
 }
 
 bool TileMap::ColissionWithKey(int y, int x)
