@@ -282,33 +282,19 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 		}
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 1;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 2;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			if (map[y * mapSize.x + x] == 5)
-			{
-				map[(y + 1) * mapSize.x + x] = 0;
-			}
-			else if (map[y * mapSize.x + x] == 7)
-			{
-				map[(y - 1) * mapSize.x + x] = 0;
-			}
-			map[y * mapSize.x + x] = 0;
-			map[7] = 0;
-			map[8] = 0;
-			map[9] = 0;
-			map[10] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			ColissionWithKey(y, x);
 		}
 	}
 
@@ -335,33 +321,19 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 		
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 1;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 2;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			if (map[y * mapSize.x + x] == 5)
-			{
-				map[(y + 1) * mapSize.x + x] = 0;
-			}
-			else if (map[y * mapSize.x + x] == 7)
-			{
-				map[(y - 1) * mapSize.x + x] = 0;
-			}
-			map[y * mapSize.x + x] = 0;
-			map[7] = 0;
-			map[8] = 0;
-			map[9] = 0;
-			map[10] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			ColissionWithKey(y, x);
 		}
 			
 	}
@@ -376,8 +348,6 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 	x0 = (pos.x +4) / tileSize;
 	x1 = ( (pos.x -4) + size.x - 1) / tileSize;
 	y = (pos.y + size.y - 1) / (tileSize/2);
-	int yaux = (pos.y + size.y - 1) / tileSize;
-	//int yaux = ((pos.y) / (tileSize));
 	for (int x = x0; x <= x1; x++)
 	{
 		if (map[y * mapSize.x + x] == 1)
@@ -385,11 +355,6 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
-			/*if (*posY - tileSize * y + size.y <= 4)
-			{
-				//*posY = tileSize * y - size.y;
-				return true;
-			}*/
 		}
 		if (map[y * mapSize.x + x] == 10)
 		{
@@ -397,33 +362,19 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		}
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 1;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 2;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			if (map[y * mapSize.x + x] == 5)
-			{
-				map[(y + 1) * mapSize.x + x] = 0;
-			}
-			else if (map[y * mapSize.x + x] == 7)
-			{
-				map[(y - 1) * mapSize.x + x] = 0;
-			}
-			map[y * mapSize.x + x] = 0;
-			map[7] = 0;
-			map[8] = 0;
-			map[9] = 0;
-			map[10] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			ColissionWithKey(y, x);
 		}
 
 	}
@@ -453,38 +404,44 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		}
 		if (map[y * mapSize.x + x] == 2)
 		{
-			map[y * mapSize.x + x] = 1;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 3)
 		{
-			map[y * mapSize.x + x] = 2;
+			map[y * mapSize.x + x] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
-			if(map[y * mapSize.x + x] == 5)
-			{
-				map[(y+1) * mapSize.x + x] = 0;
-			}
-			else if (map[y * mapSize.x + x] == 7) 
-			{
-				map[(y -1) * mapSize.x + x] = 0;
-			}
-			map[y * mapSize.x + x] = 0;
-			map[7] = 0;
-			map[8] = 0;
-			map[9] = 0;
-			map[10] = 0;
-			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			return true;
+			ColissionWithKey(y, x);
 		}
 
 	}
 
 	return false;
+}
+
+bool TileMap::ColissionWithKey(int y, int x)
+{
+	if (map[y * mapSize.x + x] == 5)
+	{
+		map[(y + 1) * mapSize.x + x] = 0;
+	}
+	else if (map[y * mapSize.x + x] == 7)
+	{
+		map[(y - 1) * mapSize.x + x] = 0;
+	}
+	map[y * mapSize.x + x] = 0;
+	map[7] = 0;
+	map[8] = 0;
+	map[9] = 0;
+	map[10] = 0;
+	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	return true;
+
 }
 
 

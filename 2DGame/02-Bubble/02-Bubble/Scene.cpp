@@ -39,12 +39,14 @@ void Scene::init()
 {
 	initShaders();
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410 ), texProgram);
 	map->setShaderProgram(texProgram);
+	map1->setShaderProgram(texProgram);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH +150 - 1), float(SCREEN_HEIGHT- 1), 0.f);
 	
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -74,6 +76,7 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->render();
+	map1->render();
 	player->render();
 	ball->render();
 }
