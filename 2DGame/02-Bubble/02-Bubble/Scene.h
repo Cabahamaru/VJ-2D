@@ -29,6 +29,9 @@ private:
 
 private:
 	TileMap *map;
+	TileMap* map1;
+	TileMap* map2;
+	TileMap* map3;
 	Player *player;
 	Ball *ball;
 	ShaderProgram texProgram;

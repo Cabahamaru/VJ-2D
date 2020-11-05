@@ -77,15 +77,15 @@ void Ball::CollisionWithPlayer()
 {
 	glm::ivec2 posPlayer = player->getPosition();
 	int x0Ball = posBall.x;
-	int x1Ball = posBall.x + 32;
+	int x1Ball = posBall.x + 23;
 
-	int yBall = posBall.y + 16;
+	int yBall = posBall.y + 23;
 
 	int x0Player = posPlayer.x;
 	int x1Player = posPlayer.x + 32;
 
 	int y0Player = posPlayer.y;
-	int y1Player = posPlayer.y + 16;
+	int y1Player = posPlayer.y + 8;
 
 	if ((x1Ball > x0Player) && (x0Ball < x1Player)) 
 	{

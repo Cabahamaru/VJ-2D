@@ -292,6 +292,24 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
+		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
+		{
+			if (map[y * mapSize.x + x] == 5)
+			{
+				map[(y + 1) * mapSize.x + x] = 0;
+			}
+			else if (map[y * mapSize.x + x] == 7)
+			{
+				map[(y - 1) * mapSize.x + x] = 0;
+			}
+			map[y * mapSize.x + x] = 0;
+			map[7] = 0;
+			map[8] = 0;
+			map[9] = 0;
+			map[10] = 0;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
 	}
 
 	return false;
@@ -324,6 +342,24 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 		if (map[y * mapSize.x + x] == 3)
 		{
 			map[y * mapSize.x + x] = 2;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
+		{
+			if (map[y * mapSize.x + x] == 5)
+			{
+				map[(y + 1) * mapSize.x + x] = 0;
+			}
+			else if (map[y * mapSize.x + x] == 7)
+			{
+				map[(y - 1) * mapSize.x + x] = 0;
+			}
+			map[y * mapSize.x + x] = 0;
+			map[7] = 0;
+			map[8] = 0;
+			map[9] = 0;
+			map[10] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
@@ -371,6 +407,24 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
+		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
+		{
+			if (map[y * mapSize.x + x] == 5)
+			{
+				map[(y + 1) * mapSize.x + x] = 0;
+			}
+			else if (map[y * mapSize.x + x] == 7)
+			{
+				map[(y - 1) * mapSize.x + x] = 0;
+			}
+			map[y * mapSize.x + x] = 0;
+			map[7] = 0;
+			map[8] = 0;
+			map[9] = 0;
+			map[10] = 0;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
 
 	}
 
@@ -406,6 +460,24 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		if (map[y * mapSize.x + x] == 3)
 		{
 			map[y * mapSize.x + x] = 2;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
+		{
+			if(map[y * mapSize.x + x] == 5)
+			{
+				map[(y+1) * mapSize.x + x] = 0;
+			}
+			else if (map[y * mapSize.x + x] == 7) 
+			{
+				map[(y -1) * mapSize.x + x] = 0;
+			}
+			map[y * mapSize.x + x] = 0;
+			map[7] = 0;
+			map[8] = 0;
+			map[9] = 0;
+			map[10] = 0;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 			return true;
 		}
