@@ -7,6 +7,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "Ball.h"
+#include "Guard.h"
 #include "Texture.h"
 #include "TexturedQuad.h"
 
@@ -39,11 +40,13 @@ private:
 	TileMap* map3;
 	Player *player;
 	Ball *ball;
+	Guard* guard;
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
 	TexturedQuad* stats, *bg;
 	Texture imgStats, imgBg;
+	bool Alarm;
 
 	int room;
 

@@ -38,6 +38,7 @@ Scene::~Scene()
 void Scene::init()
 {
 	room = 0;
+	Alarm = false;
 	initShaders();
 
 	glm::vec2 geom[2] = { glm::vec2(130.f, 0.f), glm::vec2(130 + 180.f, 0 + 480.f) };
@@ -76,6 +77,10 @@ void Scene::init()
 	ball->setTileMap(map);
 	ball->setPlayer(player);
 	currentTime = 0.0f;
+
+	guard = new Guard();
+	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	guard->setPlayer(player);
 }
 
 
@@ -84,6 +89,12 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	player->update(deltaTime);
 	ball->update(deltaTime);
+
+	if(map->getAlarmStatus() == true)
+	{
+		guard->update(deltaTime);
+	}
+	
 }
 
 void Scene::render()
@@ -102,6 +113,11 @@ void Scene::render()
 	map1->render();
 	player->render();
 	ball->render();
+	if (map->getAlarmStatus() == true)
+	{
+		guard->render();
+	}
+
 
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);

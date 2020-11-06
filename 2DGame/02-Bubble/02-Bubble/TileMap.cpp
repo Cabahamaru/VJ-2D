@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "TileMap.h"
+#include "Scene.h"
 
 #define SCREEN_X 32
 #define SCREEN_Y 32
@@ -20,6 +21,7 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
 	loadLevel(levelFile);
+	Alarm = false;
 	prepareArrays(minCoords, program);
 }
 
@@ -88,6 +90,10 @@ bool TileMap::loadLevel(const string &levelFile)
 				map[j * mapSize.x + i] = 0;
 			else if (tile == 'a')
 				map[j * mapSize.x + i] = 10;
+			else if (tile == 'b')
+				map[j * mapSize.x + i] = 11;
+			else if (tile == 'c')
+				map[j * mapSize.x + i] = 12;
 			else
 				map[j*mapSize.x+i] = tile - int('0');
 		}
@@ -121,6 +127,20 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize/2);
 					texCoordTile[0] = glm::vec2(0.75f,0.0f);
 					texCoordTile[1] = glm::vec2(1.f, 0.125f);
+					aux = true;
+				}
+				else if (tile == 11) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.25f, 0.5f);
+					texCoordTile[1] = glm::vec2(0.5f, 0.625f);
+					aux = true;
+				}
+				else if (tile == 12) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.25f, 0.625f);
+					texCoordTile[1] = glm::vec2(0.5f, 0.75f);
 					aux = true;
 				}
 				else if (tile == 1) {
@@ -294,6 +314,10 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 		{
 			return ColissionWithKey(y, x);
 		}
+		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
+		{
+			return ColissionWithAlarm(y, x);
+		}
 	}
 
 	return false;
@@ -330,6 +354,10 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
 			return ColissionWithKey(y, x);
+		}
+		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
+		{
+			return ColissionWithAlarm(y, x);
 		}
 			
 	}
@@ -369,6 +397,10 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
 			return ColissionWithKey(y, x);
+		}
+		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
+		{
+			return ColissionWithAlarm(y, x);
 		}
 
 	}
@@ -411,6 +443,10 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		{
 			return ColissionWithKey(y, x);
 		}
+		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
+		{
+			return ColissionWithAlarm(y, x);
+		}
 
 	}
 
@@ -444,9 +480,30 @@ bool TileMap::ColissionWithKey(int y, int x)
 
 }
 
+bool TileMap::ColissionWithAlarm(int y, int x)
+{
+	if (map[y * mapSize.x + x] == 11)
+	{
+		map[(y + 1) * mapSize.x + x] = 0;
+	}
+	else if (map[y * mapSize.x + x] == 12)
+	{
+		map[(y - 1) * mapSize.x + x] = 0;
+	}
+	map[y * mapSize.x + x] = 0;
+	Alarm = true;
+	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	return true;
+}
+
 
 void TileMap::setShaderProgram(ShaderProgram program) {
 	texProgram = program;
+}
+
+bool TileMap::getAlarmStatus()
+{
+	return Alarm;
 }
 
 

@@ -39,9 +39,12 @@ public:
 	bool collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size, int* posY) ;
 
 	bool ColissionWithKey(int y, int x);
+	bool ColissionWithAlarm(int y, int x);
 	bool BreakBrick(int y, int x);
 
 	void setShaderProgram(ShaderProgram program);
+
+	bool getAlarmStatus();
 
 
 	
@@ -59,6 +62,7 @@ private:
 	glm::vec2 tileTexSize;
 	int *map;
 	ShaderProgram texProgram;
+	bool Alarm;
 
 };
 
