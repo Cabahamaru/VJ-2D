@@ -50,6 +50,10 @@ void Ball::update(int deltaTime)
 
 		}
 		else CollisionWithPlayer();
+		
+		if (posBall.y > 450) {
+			//if (Game::instance().getCurrentRoom() == 0) Game::instance().loselife();
+		}
 
 
 	}
