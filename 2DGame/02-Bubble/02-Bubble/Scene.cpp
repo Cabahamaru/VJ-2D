@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Scene.h"
 #include "Game.h"
+#include <GL/glut.h>
 
 
 
@@ -40,6 +41,8 @@ void Scene::init()
 	room = 0;
 	Alarm = false;
 	initShaders();
+
+	soundEngine->stopAllSounds();
 
 	glm::vec2 geom[2] = { glm::vec2(130.f, 0.f), glm::vec2(130 + 180.f, 0 + 480.f) };
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
@@ -81,6 +84,8 @@ void Scene::init()
 	guard = new Guard();
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
+
+
 }
 
 
@@ -95,6 +100,14 @@ void Scene::update(int deltaTime)
 		guard->update(deltaTime);
 	}
 	
+}
+
+void drawString(float x, float y, char* string) {
+	glRasterPos2f(x, y);
+	glColor3f(0., 0., 0.);
+	for (char* c = string; *c != '\0'; c++) {
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *c);  // Updates the position
+	}
 }
 
 void Scene::render()
@@ -126,7 +139,10 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	stats->render(imgStats);
+	
+	//drawString(100., 100., "Hola");
 }
+
 
 void Scene::initShaders()
 {
@@ -170,8 +186,10 @@ void Scene::nextRoom()
 	{
 	
 	}
-
-
 }
 
+void Scene::setSound(ISoundEngine* s) {
+	
+	soundEngine = s;
+}
 

@@ -13,11 +13,10 @@ void Game::init()
 	level = 0;
 	money = 0;
 	points = 0;
-	SoundEngine = irrklang::createIrrKlangDevice();
+	SoundEngine = createIrrKlangDevice();
 	if (!SoundEngine)
 	{
 		printf("Could not startup engine\n");
-		//return 0; // error starting up the engine
 	}
 	SoundEngine->setSoundVolume(0.5f);
 	SoundEngine->play2D("sounds/avengers-theme-8-bit.wav", true);
@@ -103,6 +102,7 @@ void Game::newaction(int act)
 		menu.init();
 	}
 	else if (act == 0) {
+		scene.setSound(SoundEngine);
 		scene.init();
 	}
 	else if (act == 1) {
@@ -125,6 +125,16 @@ int Game::getlevel()
 {
 	return level;
 
+}
+int Game::getpoints() {
+
+	return points;
+}
+
+void Game::breakbrick() {
+	points += 100;
+	SoundEngine->setSoundVolume(0.1f);
+	SoundEngine->play2D("sounds/block_break.mp3", false);
 }
 
 

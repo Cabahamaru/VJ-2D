@@ -1,0 +1,49 @@
+﻿  autofit.c
+  ftbase.c
+  ftbbox.c
+  ftbdf.c
+  ftbitmap.c
+  ftcid.c
+  ftfstype.c
+  ftgasp.c
+  ftglyph.c
+  ftgxval.c
+  ftinit.c
+  ftmm.c
+  ftotval.c
+  ftpatent.c
+  ftpfr.c
+  ftstroke.c
+  ftsynth.c
+  ftsystem.c
+  fttype1.c
+  ftwinfnt.c
+  bdf.c
+  ftcache.c
+  cff.c
+  type1cid.c
+  ftgzip.c
+  ftlzw.c
+  pcf.c
+  pfr.c
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\base\ftstroke.c(1116): warning C4701: posiblemente se utilizó la variable local 'sigma' sin inicializar
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\base\ftstroke.c(1021): warning C4701: posiblemente se utilizó la variable local 'sigma' sin inicializar
+  psaux.c
+  pshinter.c
+  psmodule.c
+  raster.c
+  sfnt.c
+  smooth.c
+  truetype.c
+  type1.c
+  type42.c
+  winfnt.c
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\sfnt\sfwoff2.c(317,37): warning C4100: 'src_size': parámetro formal sin referencia (compilando archivo de origen ..\..\..\src\sfnt\sfnt.c)
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\sfnt\sfwoff2.c(316,37): warning C4100: 'src': parámetro formal sin referencia (compilando archivo de origen ..\..\..\src\sfnt\sfnt.c)
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\sfnt\sfwoff2.c(315,37): warning C4100: 'dst_size': parámetro formal sin referencia (compilando archivo de origen ..\..\..\src\sfnt\sfnt.c)
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\sfnt\sfwoff2.c(314,37): warning C4100: 'dst': parámetro formal sin referencia (compilando archivo de origen ..\..\..\src\sfnt\sfnt.c)
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\smooth\ftgrays.c(533): warning C4706: asignación en la expresión condicional
+C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\src\truetype\ttgxvar.c(2237): warning C4701: posiblemente se utilizó la variable local 'fvar_head' sin inicializar
+  ftdebug.c
+     Creando biblioteca ..\..\..\objs\Win32\Debug\freetype.lib y objeto ..\..\..\objs\Win32\Debug\freetype.exp
+  freetype.vcxproj -> C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\builds\windows\vc2010\..\..\..\objs\Win32\Debug\freetype.dll

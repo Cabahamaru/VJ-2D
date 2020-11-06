@@ -8,9 +8,13 @@
 #include "Player.h"
 #include "Ball.h"
 #include "Guard.h"
+#include "Text.h"
 #include "Texture.h"
 #include "TexturedQuad.h"
+#include <irrKlang.h>
 
+
+using namespace irrklang;
 
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
@@ -27,6 +31,7 @@ public:
 	void update(int deltaTime);
 	void render();
 	int getRoom();
+	void setSound(ISoundEngine* s);
 
 	void nextRoom();
 
@@ -42,11 +47,14 @@ private:
 	Ball *ball;
 	Guard* guard;
 	ShaderProgram texProgram;
+	ISoundEngine* soundEngine;
 	float currentTime;
 	glm::mat4 projection;
+	//Text text;
 	TexturedQuad* stats, *bg;
 	Texture imgStats, imgBg;
 	bool Alarm;
+	unsigned char* strpoints;
 
 	int room;
 

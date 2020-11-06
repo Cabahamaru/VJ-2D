@@ -51,8 +51,10 @@ public:
 	void newaction(int act);
 	int getCurrentRoom();
 	void loselife();
+	void breakbrick();
 
 	int getlevel();
+	int getpoints();
 
 private:
 	bool bPlay;                       // Continue to play game?
@@ -63,7 +65,7 @@ private:
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
 	int state;
-	irrklang::ISoundEngine* SoundEngine;
+	ISoundEngine* SoundEngine;
 	int level, money, points;
 };
 

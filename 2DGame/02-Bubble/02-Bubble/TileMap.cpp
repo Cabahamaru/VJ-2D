@@ -4,6 +4,7 @@
 #include <vector>
 #include "TileMap.h"
 #include "Scene.h"
+#include "Game.h"
 
 #define SCREEN_X 32
 #define SCREEN_Y 32
@@ -457,6 +458,7 @@ bool TileMap::BreakBrick(int y, int x)
 {
 	map[y * mapSize.x + x] = 0;
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	Game::instance().breakbrick();
 	return true;
 }
 
