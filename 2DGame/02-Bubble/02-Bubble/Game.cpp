@@ -1,11 +1,10 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "Game.h"
-//#include <irrKlang.h>
+#include <irrKlang.h>
 #include <iostream>
 
-//using namespace irrklang;
-
+using namespace irrklang;
 
 void Game::init()
 { 
@@ -14,16 +13,15 @@ void Game::init()
 	level = 0;
 	money = 0;
 	points = 0;
-	/*
-	SoundEngine = createIrrKlangDevice();
+	/*SoundEngine = irrklang::createIrrKlangDevice();
 	if (!SoundEngine)
 	{
 		printf("Could not startup engine\n");
 		//return 0; // error starting up the engine
 	}
 	SoundEngine->setSoundVolume(0.5f);
-	SoundEngine->play2D("sounds/avengers-theme-8-bit.mp3", true);
-	*/
+	SoundEngine->play2D("sounds/avengers-theme-8-bit.wav", true);*/
+
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
 	menu.init();
