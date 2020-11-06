@@ -112,6 +112,14 @@ void Game::newaction(int act)
 	}
 }
 
+int Game::getCurrentRoom() {
+	return scene.getRoom();
+}
+
+void Game::loselife() {
+
+}
+
 
 
 

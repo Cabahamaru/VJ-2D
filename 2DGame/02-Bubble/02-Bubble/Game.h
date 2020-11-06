@@ -48,6 +48,8 @@ public:
 	bool getSpecialKey(int key) const;
 	void setSpecialKey(int key);
 	void newaction(int act);
+	int getCurrentRoom();
+	void loselife();
 
 private:
 	bool bPlay;                       // Continue to play game?
