@@ -38,6 +38,18 @@ Scene::~Scene()
 void Scene::init()
 {
 	initShaders();
+
+	glm::vec2 geom[2] = { glm::vec2(130.f, 0.f), glm::vec2(130 + 180.f, 0 + 480.f) };
+	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
+	stats = TexturedQuad::createTexturedQuad(geom, texCoords, texProgram);
+	imgStats.loadFromFile("images/stats.png", TEXTURE_PIXEL_FORMAT_RGBA);
+    imgStats.setMagFilter(GL_NEAREST);
+	
+	glm::vec2 geom2[2] = { glm::vec2(0.f, 0.f), glm::vec2(640.f, 0 + 480.f) };
+	glm::vec2 texCoords2[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
+	bg = TexturedQuad::createTexturedQuad(geom2, texCoords2, texProgram);
+	imgBg.loadFromFile("images/background.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410 ), texProgram);
 	map->setShaderProgram(texProgram);
@@ -55,6 +67,8 @@ void Scene::init()
 	ball->setPlayer(player);
 	
 	currentTime = 0.0f;
+
+	room = 0;
 }
 
 
@@ -75,10 +89,20 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	
+	bg->render(imgBg);
 	map->render();
 	map1->render();
 	player->render();
 	ball->render();
+
+	texProgram.use();
+	texProgram.setUniformMatrix4f("projection", projection);
+	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
+	modelview = glm::translate(glm::mat4(1.0f), glm::vec3(480.f, 0.f, 0.f));
+	texProgram.setUniformMatrix4f("modelview", modelview);
+	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	stats->render(imgStats);
 }
 
 void Scene::initShaders()
@@ -109,6 +133,10 @@ void Scene::initShaders()
 	texProgram.bindFragmentOutput("outColor");
 	vShader.free();
 	fShader.free();
+}
+
+int Scene::getRoom() {
+	return room;
 }
 
 

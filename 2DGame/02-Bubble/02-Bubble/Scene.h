@@ -7,6 +7,8 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "Ball.h"
+#include "Texture.h"
+#include "TexturedQuad.h"
 
 
 // Scene contains all the entities of our game.
@@ -23,6 +25,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
+	int getRoom();
 
 private:
 	void initShaders();
@@ -37,6 +40,10 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+	TexturedQuad* stats, *bg;
+	Texture imgStats, imgBg;
+
+	int room;
 
 };
 
