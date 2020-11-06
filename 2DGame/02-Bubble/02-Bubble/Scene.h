@@ -27,6 +27,8 @@ public:
 	void render();
 	int getRoom();
 
+	void nextRoom();
+
 private:
 	void initShaders();
 

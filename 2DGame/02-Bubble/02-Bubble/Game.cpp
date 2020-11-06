@@ -11,6 +11,9 @@ void Game::init()
 { 
 	bPlay = true;
 	state = 3;
+	level = 0;
+	money = 0;
+	points = 0;
 	/*
 	SoundEngine = createIrrKlangDevice();
 	if (!SoundEngine)
@@ -117,6 +120,12 @@ int Game::getCurrentRoom() {
 }
 
 void Game::loselife() {
+
+}
+
+int Game::getlevel()
+{
+	return level;
 
 }
 

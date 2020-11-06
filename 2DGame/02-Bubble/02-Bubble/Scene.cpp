@@ -37,6 +37,7 @@ Scene::~Scene()
 
 void Scene::init()
 {
+	room = 0;
 	initShaders();
 
 	glm::vec2 geom[2] = { glm::vec2(130.f, 0.f), glm::vec2(130 + 180.f, 0 + 480.f) };
@@ -50,10 +51,19 @@ void Scene::init()
 	bg = TexturedQuad::createTexturedQuad(geom2, texCoords2, texProgram);
 	imgBg.loadFromFile("images/background.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	
-	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410 ), texProgram);
-	map->setShaderProgram(texProgram);
-	map1->setShaderProgram(texProgram);
+	
+	if(Game::instance().getlevel() == 0)
+	{
+		map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+		map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410), texProgram);
+		map->setShaderProgram(texProgram);
+		map1->setShaderProgram(texProgram);
+	}
+
+	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	//map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410 ), texProgram);
+	//map->setShaderProgram(texProgram);
+	//map1->setShaderProgram(texProgram);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
@@ -65,10 +75,7 @@ void Scene::init()
 	ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
 	ball->setTileMap(map);
 	ball->setPlayer(player);
-	
 	currentTime = 0.0f;
-
-	room = 0;
 }
 
 
@@ -139,5 +146,16 @@ int Scene::getRoom() {
 	return room;
 }
 
+void Scene::nextRoom()
+{
+	room++;
+
+	if(room = 1)
+	{
+	
+	}
+
+
+}
 
 

@@ -51,6 +51,8 @@ public:
 	int getCurrentRoom();
 	void loselife();
 
+	int getlevel();
+
 private:
 	bool bPlay;                       // Continue to play game?
 	Scene scene;                      // Scene to render
@@ -61,6 +63,7 @@ private:
 	                                  // we can have access at any time
 	int state;
 	//ISoundEngine* SoundEngine;
+	int level, money, points;
 };
 
 
