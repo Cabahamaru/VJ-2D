@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Game.h"
 #include <GL/glut.h>
+#include < GL/freeglut.h>
 
 
 
@@ -85,6 +86,8 @@ void Scene::init()
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
 
+	//text->init("fonts/ARCADEPI.ttf");
+
 
 }
 
@@ -110,18 +113,31 @@ void drawString(float x, float y, char* string) {
 	}
 }
 
+void RenderString(float x, float y, void* font, const char* string)
+{
+//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	
+	//glDisable(GL_LIGHTING);
+	glRasterPos2i(x, y);
+	glColor3i(1.0, 0.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
+	glutBitmapString(font, (const unsigned char*)string);
+}
+
 void Scene::render()
 {
-	glm::mat4 modelview;
 
+	RenderString(32, 100, GLUT_BITMAP_HELVETICA_18, "Hello");
+	
+	glm::mat4 modelview;
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);
 	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
-	
-	bg->render(imgBg);
+	//bg->render(imgBg);
 	map->render();
 	map1->render();
 	player->render();
@@ -131,7 +147,6 @@ void Scene::render()
 		guard->render();
 	}
 
-
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);
 	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
@@ -139,8 +154,8 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	stats->render(imgStats);
-	
-	//drawString(100., 100., "Hola");
+	//string a = "hola";
+    //text->render(a, glm::vec2(32, 32), 22, glm::vec4(1, 0, 0, 1));
 }
 
 
