@@ -45,6 +45,7 @@ public:
 	void setShaderProgram(ShaderProgram program);
 
 	bool getAlarmStatus();
+	void setAlarmStatus(bool b);
 
 	void moveTileMap(const glm::vec2& minCoords);
 

@@ -42,6 +42,10 @@ void Guard::update(int deltaTime)
 	{
 		posGuard.y -= 1;
 	}
+	if (posPlayer == posGuard) {
+		Game::instance().stop_alarm();
+		Game::instance().loselife();
+	}
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posGuard.x), float(tileMapDispl.y + posGuard.y)));
 

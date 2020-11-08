@@ -57,7 +57,8 @@ private:
 	bool Alarm;
 	unsigned char* strpoints;
 
-	int room, lives;
+	int room;
+	int lives = 1;
 	Text* text;
 
 };

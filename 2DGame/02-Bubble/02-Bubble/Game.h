@@ -54,6 +54,7 @@ public:
 	void loselife();
 	void breakbrick();
 	void alarm_ring();
+	void stop_alarm();
 	void catch_key();
 
 	int getlevel();

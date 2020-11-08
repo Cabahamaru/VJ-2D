@@ -40,7 +40,6 @@ Scene::~Scene()
 void Scene::init()
 {
 	room = 0;
-	lives = 3;
 	Alarm = false;
 	initShaders();
 
@@ -235,8 +234,15 @@ void Scene::setSound(ISoundEngine* s) {
 
 
 void Scene::loselife() {
-	if (lives > 0) --lives;
+	if (lives > 0) {
+		player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+		ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		map->setAlarmStatus(false);
+		--lives;
+	}
 	else {
-		Game::instance().newaction(5);
+
+		Game::instance().newaction(4);
 	}
 }

@@ -510,6 +510,10 @@ bool TileMap::getAlarmStatus()
 	return Alarm;
 }
 
+void TileMap::setAlarmStatus(bool b) {
+	Alarm = b;
+}
+
 void TileMap::moveTileMap(const glm::vec2& minCoords) {
 	//currentPos = finalPos;
 	//finalPos = minCoords;
