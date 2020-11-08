@@ -510,7 +510,18 @@ bool TileMap::getAlarmStatus()
 	return Alarm;
 }
 
+void TileMap::moveTileMap(const glm::vec2& minCoords) {
+	//currentPos = finalPos;
+	//finalPos = minCoords;
+	prepareArrays(minCoords, texProgram);
+}
 
+bool TileMap::checkRoomChange(const glm::vec2& ballpos)
+{
+	int y = ((ballpos.y) / (tileSize / 2));
+	if (ballpos.y < 500)
+		return true;
+}
 
 
 

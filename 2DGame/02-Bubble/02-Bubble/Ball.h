@@ -5,6 +5,7 @@
 
 #include "Sprite.h"
 #include "TileMap.h"
+//#include "Scene.h"
 #include "Player.h"
 class Ball
 {
@@ -15,6 +16,7 @@ public:
 
 	void setTileMap(TileMap* tileMap);
 	void setPosition(const glm::vec2& pos);
+	glm::vec2 getPosition();
 	void setPlayer(Player *p);
 
 	void CollisionWithPlayer();
@@ -26,6 +28,7 @@ private:
 	Sprite* sprite;
 	TileMap* map;
 	Player* player;
+	//Scene* scene;
 };
 
 

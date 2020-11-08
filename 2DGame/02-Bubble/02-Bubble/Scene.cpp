@@ -153,14 +153,24 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	//bg->render(imgBg);
+
+	/*if(map->checkRoomChange(ball->getPosition()))
+	{
+	map1->moveTileMap(glm::vec2(32, 32));
+	
+	}*/
 	map->render();
 	map1->render();
+
 	player->render();
 	ball->render();
 	if (map->getAlarmStatus() == true)
 	{
 		guard->render();
 	}
+
+
+
 
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);
@@ -211,10 +221,10 @@ int Scene::getRoom() {
 void Scene::nextRoom()
 {
 	room++;
-
 	if(room = 1)
 	{
-	
+		//map->moveTileMap(glm::vec2(32, 592));
+		//map1->moveTileMap(glm::vec2(32, 32));
 	}
 }
 
