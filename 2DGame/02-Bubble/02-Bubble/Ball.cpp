@@ -5,6 +5,7 @@
 #include "Ball.h"
 #include "Game.h"
 #include "Player.h"
+#include "scene.h"
 
 bool Start = false;
 int yaux = -2;
@@ -50,16 +51,22 @@ void Ball::update(int deltaTime)
 
 		}
 		else CollisionWithPlayer();
-		
+
 		if (posBall.y > 450) {
 			//if (Game::instance().getCurrentRoom() == 0) Game::instance().loselife();
 		}
-
-
+		else if (posBall.y < 5)
+		{
+			if (direction.y < 0)
+			{
+				//scene->nextRoom();
+			}
+				
+		}
+		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBall.x), float(tileMapDispl.y + posBall.y)));
 	}
-
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBall.x), float(tileMapDispl.y + posBall.y)));
 }
+
 
 void Ball::render()
 {
@@ -76,6 +83,12 @@ void Ball::setPosition(const glm::vec2& pos)
 	posBall = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBall.x), float(tileMapDispl.y + posBall.y)));
 }
+glm::vec2 Ball::getPosition()
+{
+	return posBall;
+}
+
+
 
 void Ball::CollisionWithPlayer() 
 {

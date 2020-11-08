@@ -46,6 +46,10 @@ public:
 
 	bool getAlarmStatus();
 
+	void moveTileMap(const glm::vec2& minCoords);
+
+	bool checkRoomChange(const glm::vec2& ballpos);
+
 
 	
 private:
