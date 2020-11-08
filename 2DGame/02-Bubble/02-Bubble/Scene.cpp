@@ -118,17 +118,31 @@ void RenderString(float x, float y, void* font, const char* string)
 //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	
-	//glDisable(GL_LIGHTING);
-	glRasterPos2i(x, y);
-	glColor3i(1.0, 0.0, 0.0);
-	glColor3f(1.0, 0.0, 0.0);
+	glRasterPos2f(x, y);
+	//glColor3i(1.0, 0.0, 0.0);
+	//glColor3f(1,1,1);
+	//glColor3b(1, 1, 1);
+	//glColor3d(1.0,1.0,1.0);
+	glColor3ub(1, 1, 1);
+	glDisable(GL_LIGHTING);
+	//glDisable(GL_TEXTURE);
+	//glDisable(GL_FOG);
 	glutBitmapString(font, (const unsigned char*)string);
 }
 
 void Scene::render()
 {
 
-	RenderString(32, 100, GLUT_BITMAP_HELVETICA_18, "Hello");
+	RenderString(32, 80, GLUT_BITMAP_HELVETICA_18, "Hello");
+	/*glColor3f(1, 1, 1);
+	glRasterPos2f(32, 32);
+	string str = "some text";
+	for (int i = 0; i < (int)str.length(); i++)
+	{
+		char c = str[i];
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
+	}*/
+
 	
 	glm::mat4 modelview;
 	texProgram.use();
