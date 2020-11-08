@@ -477,6 +477,7 @@ bool TileMap::ColissionWithKey(int y, int x)
 	map[8] = 0;
 	map[9] = 0;
 	map[10] = 0;
+	Game::instance().catch_key();
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	return true;
 

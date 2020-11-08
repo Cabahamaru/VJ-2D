@@ -142,6 +142,11 @@ void Game::alarm_ring() {
 	SoundEngine->play2D("sounds/alarm.mp3", false);
 }
 
+void Game::catch_key() {
+	SoundEngine->setSoundVolume(0.3f);
+	SoundEngine->play2D("sounds/key.mp3", false);
+}
+
 
 
 
