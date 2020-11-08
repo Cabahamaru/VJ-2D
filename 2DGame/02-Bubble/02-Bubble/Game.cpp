@@ -101,9 +101,6 @@ void Game::newaction(int act)
 
 	state = act;
 	if (act == 3) { //pantalla de menu
-		SoundEngine->stopAllSounds();
-		SoundEngine->setSoundVolume(0.5f);
-		SoundEngine->play2D("sounds/avengers-theme-8-bit.mp3", true);
 		menu.init();
 	}
 	else if (act == 0) { //jugar
@@ -118,8 +115,6 @@ void Game::newaction(int act)
 	}
 	else if (act == 4) { //pantalla de game over
 		SoundEngine->stopAllSounds();
-		SoundEngine->setSoundVolume(0.5f);
-		SoundEngine->play2D("sounds/game_over.mp3", false);
 		gameover.init();
 	}
 }

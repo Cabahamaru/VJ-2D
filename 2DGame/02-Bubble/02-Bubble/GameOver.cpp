@@ -23,6 +23,13 @@ GameOver::~GameOver()
 void GameOver::init()
 {
 	initShaders();
+	SoundEngine = createIrrKlangDevice();
+	if (!SoundEngine)
+	{
+		printf("Could not startup engine\n");
+	}
+	SoundEngine->setSoundVolume(0.5f);
+	SoundEngine->play2D("sounds/game_over.mp3", false);
 	currentTime = 0.0f;
 	accion = 0;
 	glm::vec2 geom[2] = { glm::vec2(0.f, 0.f), glm::vec2(640.f, 480.f) };
@@ -84,7 +91,11 @@ void GameOver::update(int deltaTime)
 	if (Game::instance().getKey(13)) {
 		Game::instance().keyReleased(13);
 		if (accion == 0) Game::instance().newaction(0);
-		else if (accion == 1) Game::instance().newaction(3);
+		else if (accion == 1) {
+			SoundEngine->stopAllSounds();
+			Game::instance().init();
+			//Game::instance().newaction(3);
+		}
 	}
 }
 

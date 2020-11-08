@@ -496,6 +496,7 @@ bool TileMap::ColissionWithAlarm(int y, int x)
 	map[y * mapSize.x + x] = 0;
 	Alarm = true;
 	Game::instance().alarm_ring();
+	Game::instance().stop_alarm();
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	return true;
 }

@@ -58,7 +58,7 @@ private:
 	unsigned char* strpoints;
 
 	int room;
-	int lives = 1;
+	int lives = 3;
 	Text* text;
 
 };

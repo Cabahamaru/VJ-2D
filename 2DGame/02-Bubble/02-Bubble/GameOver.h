@@ -5,6 +5,10 @@
 #include "ShaderProgram.h"
 #include "Texture.h"
 #include "TexturedQuad.h"
+#include <irrKlang.h>
+#pragma comment(lib, "irrKlang.lib")
+
+using namespace irrklang;
 
 #define CAMERA_WIDTH 640
 #define CAMERA_HEIGHT 480
@@ -31,6 +35,8 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+
+	ISoundEngine* SoundEngine;
 
 };
 
