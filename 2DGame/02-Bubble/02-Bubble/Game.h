@@ -52,6 +52,7 @@ public:
 	int getCurrentRoom();
 	void loselife();
 	void breakbrick();
+	void alarm_ring();
 
 	int getlevel();
 	int getpoints();

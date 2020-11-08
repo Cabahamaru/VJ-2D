@@ -137,6 +137,11 @@ void Game::breakbrick() {
 	SoundEngine->play2D("sounds/block_break.mp3", false);
 }
 
+void Game::alarm_ring() {
+	SoundEngine->setSoundVolume(0.1f);
+	SoundEngine->play2D("sounds/alarm.mp3", false);
+}
+
 
 
 
