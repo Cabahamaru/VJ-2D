@@ -40,6 +40,7 @@ Scene::~Scene()
 void Scene::init()
 {
 	room = 0;
+	lives = 3;
 	Alarm = false;
 	initShaders();
 
@@ -222,3 +223,10 @@ void Scene::setSound(ISoundEngine* s) {
 	soundEngine = s;
 }
 
+
+void Scene::loselife() {
+	if (lives > 0) --lives;
+	else {
+		Game::instance().newaction(5);
+	}
+}

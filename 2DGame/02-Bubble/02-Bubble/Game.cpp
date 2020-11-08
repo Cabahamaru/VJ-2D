@@ -19,7 +19,7 @@ void Game::init()
 		printf("Could not startup engine\n");
 	}
 	SoundEngine->setSoundVolume(0.5f);
-	SoundEngine->play2D("sounds/avengers-theme-8-bit.wav", true);
+	SoundEngine->play2D("sounds/avengers-theme-8-bit.mp3", true);
 	
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
@@ -32,6 +32,7 @@ bool Game::update(int deltaTime)
 	else if (state == 0) scene.update(deltaTime);
 	else if (state == 1) inst.update(deltaTime);
 	else if (state == 2) credits.update(deltaTime);
+	else if (state == 4) gameover.update(deltaTime);
 	
 	return bPlay;
 }
@@ -44,6 +45,7 @@ void Game::render()
 	else if (state == 0) scene.render();
 	else if (state == 1) inst.render();
 	else if (state == 2) credits.render();
+	else if (state == 4) gameover.render();
 }
 
 void Game::keyPressed(int key)
@@ -98,18 +100,24 @@ void Game::newaction(int act)
 {
 
 	state = act;
-	if (act == 3) {
+	if (act == 3) { //pantalla de menu
 		menu.init();
 	}
-	else if (act == 0) {
+	else if (act == 0) { //jugar
 		scene.setSound(SoundEngine);
 		scene.init();
 	}
-	else if (act == 1) {
+	else if (act == 1) { //pantalla de instrucciones
 		inst.init();
 	}
-	else {
+	else if (act == 2) { //pantalla de creditos
 		credits.init();
+	}
+	else if (act == 4) { //pantalla de game over
+		SoundEngine->stopAllSounds();
+		SoundEngine->setSoundVolume(0.5f);
+		SoundEngine->play2D("sounds/game_over.mp3", false);
+		gameover.init();
 	}
 }
 
@@ -118,7 +126,9 @@ int Game::getCurrentRoom() {
 }
 
 void Game::loselife() {
-
+	SoundEngine->setSoundVolume(0.1f);
+	SoundEngine->play2D("sounds/lose_life.mp3", false);
+	scene.loselife();
 }
 
 int Game::getlevel()
