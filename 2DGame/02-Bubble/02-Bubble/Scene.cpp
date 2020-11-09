@@ -40,6 +40,9 @@ void Scene::init()
 	Alarm = false;
 	initShaders();
 
+	points = 0;
+	lives = 3;
+
 	soundEngine->stopAllSounds();
 
 	glm::vec2 geom[2] = { glm::vec2(130.f, 0.f), glm::vec2(130 + 180.f, 0 + 480.f) };
@@ -107,14 +110,6 @@ void Scene::update(int deltaTime)
 	
 }
 
-void drawString(float x, float y, char* string) {
-	glRasterPos2f(x, y);
-	glColor3f(0., 0., 0.);
-	for (char* c = string; *c != '\0'; c++) {
-		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *c);  // Updates the position
-	}
-}
-
 
 void Scene::render()
 {
@@ -147,7 +142,11 @@ void Scene::render()
 	stats->render(imgStats);
 
 	std::string livesStr = std::to_string(lives);
-	text.render(livesStr, glm::vec2(850, 410), 32, glm::vec4(1, 1, 1, 1));
+	text.render(livesStr, glm::vec2(850, 410), 28, glm::vec4(1, 1, 1, 1));
+
+	std::string pointsStr = std::to_string(points);
+	text.render(pointsStr, glm::vec2(790, 240), 24, glm::vec4(1, 1, 1, 1));
+
 }
 
 
@@ -271,4 +270,8 @@ void Scene::loselife() {
 
 		Game::instance().newaction(4);
 	}
+}
+
+void Scene::addpoints(int x) {
+	points += x;
 }

@@ -36,6 +36,7 @@ public:
 	void nextRoom();
 	void previousRoom();
 	void loselife();
+	void addpoints(int x);
 
 private:
 	void initShaders();
@@ -59,6 +60,7 @@ private:
 
 	int room = 0;
 	int lives = 4;
+	int points = 0;
 	Text text;
 
 };

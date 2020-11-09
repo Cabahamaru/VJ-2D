@@ -140,7 +140,7 @@ int Game::getpoints() {
 }
 
 void Game::breakbrick() {
-	points += 100;
+	scene.addpoints(100);
 	SoundEngine->setSoundVolume(0.1f);
 	SoundEngine->play2D("sounds/block_break.mp3", false);
 }
