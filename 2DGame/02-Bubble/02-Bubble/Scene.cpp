@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "Game.h"
 #include <GL/glut.h>
-#include < GL/freeglut.h>
+#include <GL/freeglut.h>
 
 
 
@@ -136,8 +136,9 @@ void RenderString(float x, float y, void* font, const char* string)
 
 void Scene::render()
 {
-
-	RenderString(32, 80, GLUT_BITMAP_HELVETICA_18, "Hello");
+	std::string s = std::to_string(lives);
+	char const* c = s.c_str();
+	RenderString(32, 80, GLUT_BITMAP_HELVETICA_18, c);
 	/*glColor3f(1, 1, 1);
 	glRasterPos2f(32, 32);
 	string str = "some text";
