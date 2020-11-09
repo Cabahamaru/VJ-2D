@@ -34,6 +34,7 @@ public:
 	void setSound(ISoundEngine* s);
 
 	void nextRoom();
+	void previousRoom();
 	void loselife();
 
 private:
@@ -57,7 +58,7 @@ private:
 	bool Alarm;
 	unsigned char* strpoints;
 
-	int room;
+	int room = 0;
 	int lives = 3;
 	Text* text;
 

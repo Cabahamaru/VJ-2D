@@ -6,18 +6,18 @@ images/tilesheet.png 	-- Tilesheet
 aaaaaaaaaaaaaaaaaa
 a                a
 a                a
+a 4            4 a
+a 44224422442244 a
 a                a
-a 34434434434434 a
+a      22        a
+a      22        a
+a 5            2 a
+a 7  1111  1   2 a
+a 3  2 zz  2   3 a
 a                a
-a 4  4  4  4  4  a
-a  33            a
-a  11   33   33  a
-a 351   44   11  a
-a 371   22   123 a
-a  22        123 a
-a  44        22  a
-a  33        44  a
-a            33  a
+a      3      3  a
+a                a
+a  3       3     a
 a                a
 a                a
 a                a

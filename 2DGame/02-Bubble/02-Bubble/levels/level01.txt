@@ -17,8 +17,8 @@ a 2     44     2 a
 a  22244  44222  a
 a                a
 a                a
-a       b        a
-a       c        a
+a       d   f    a
+a       e   g    a
 a                a
 a                a
 a                a

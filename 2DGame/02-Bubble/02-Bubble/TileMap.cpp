@@ -88,13 +88,23 @@ bool TileMap::loadLevel(const string &levelFile)
 		{
 			fin.get(tile);
 			if (tile == ' ')
-				map[j * mapSize.x + i] = 0;
+				map[j * mapSize.x + i] = 0;  //nada
 			else if (tile == 'a')
-				map[j * mapSize.x + i] = 10;
+				map[j * mapSize.x + i] = 10; //Pared amarilla
+			else if (tile == 'z')
+				map[j * mapSize.x + i] = 17; //Pared amarilla dentro del mapa // el player no colisiona con ella.
 			else if (tile == 'b')
-				map[j * mapSize.x + i] = 11;
+				map[j * mapSize.x + i] = 11; //Alarma parte superior
 			else if (tile == 'c')
-				map[j * mapSize.x + i] = 12;
+				map[j * mapSize.x + i] = 12; //Alarma parte inferior
+			else if (tile == 'd')
+				map[j * mapSize.x + i] = 13; //Money $ parte superior
+			else if (tile == 'e')
+				map[j * mapSize.x + i] = 14; //Money $ parte inferior
+			else if (tile == 'f')
+				map[j * mapSize.x + i] = 15; //Money $ bolsa dinero parte superior
+			else if (tile == 'g')
+				map[j * mapSize.x + i] = 16; //Money $ bolsa dinero parte inferior
 			else
 				map[j*mapSize.x+i] = tile - int('0');
 		}
@@ -142,6 +152,41 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
 					texCoordTile[0] = glm::vec2(0.25f, 0.625f);
 					texCoordTile[1] = glm::vec2(0.5f, 0.75f);
+					aux = true;
+				}
+				else if (tile == 13) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.5f, 0.25f);
+					texCoordTile[1] = glm::vec2(0.75f, 0.375f);
+					aux = true;
+				}
+				else if (tile == 14) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.5f, 0.375f);
+					texCoordTile[1] = glm::vec2(0.75f, 0.5f);
+					aux = true;
+				}
+				else if (tile == 15) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.75f, 0.25f);
+					texCoordTile[1] = glm::vec2(1.0f, 0.375f);
+					aux = true;
+				}
+				else if (tile == 16) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.75f, 0.375f);
+					texCoordTile[1] = glm::vec2(1.0f, 0.5f);
+					aux = true;
+				}
+				else if (tile == 17) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.75f, 0.0f);
+					texCoordTile[1] = glm::vec2(1.f, 0.125f);
 					aux = true;
 				}
 				else if (tile == 1) {
@@ -295,6 +340,8 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 	{
 		if (map[y * mapSize.x + x] == 10)
 			return true;
+		if (map[y * mapSize.x + x] == 17)
+			return true;
 		if (map[y * mapSize.x + x] == 1)
 		{
 			return BreakBrick(y, x);
@@ -319,6 +366,14 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 		{
 			return ColissionWithAlarm(y, x);
 		}
+		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
+		{
+			return ColissionWithMoney(y, x);
+		}
+		if (map[y * mapSize.x + x] == 15 || map[y * mapSize.x + x] == 16)
+		{
+			return ColissionWithMoney(y, x);
+		}
 	}
 
 	return false;
@@ -334,6 +389,8 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 	for (int y = y0; y <= y1; y++)
 	{
 		if (map[y * mapSize.x + x] == 10)
+			return true;
+		if (map[y * mapSize.x + x] == 17)
 			return true;
 		if (map[y * mapSize.x + x] == 1) 
 		{
@@ -360,6 +417,14 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 		{
 			return ColissionWithAlarm(y, x);
 		}
+		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
+		{
+			return ColissionWithMoney(y, x);
+		}
+		if (map[y * mapSize.x + x] == 15 || map[y * mapSize.x + x] == 16)
+		{
+			return ColissionWithMoney(y, x);
+		}
 			
 	}
 
@@ -375,6 +440,8 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 	y = (pos.y + size.y - 1) / (tileSize/2);
 	for (int x = x0; x <= x1; x++)
 	{
+		if (map[y * mapSize.x + x] == 17)
+			return true;
 		if (map[y * mapSize.x + x] == 1)
 		{
 			return BreakBrick(y, x);
@@ -402,6 +469,14 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
 		{
 			return ColissionWithAlarm(y, x);
+		}
+		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
+		{
+			return ColissionWithMoney(y, x);
+		}
+		if (map[y * mapSize.x + x] == 15 || map[y * mapSize.x + x] == 16)
+		{
+			return ColissionWithMoney(y, x);
 		}
 
 	}
@@ -419,6 +494,8 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 	int yaux = ((pos.y) / (tileSize));
 	for (int x = x0; x <= x1; x++)
 	{
+		if (map[y * mapSize.x + x] == 17)
+			return true;
 		if (map[y * mapSize.x + x] == 1)
 		{
 			return BreakBrick(y, x);
@@ -439,7 +516,6 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		{
 			return BreakBrick(y, x);
 		}
-		
 		if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
 		{
 			return ColissionWithKey(y, x);
@@ -448,12 +524,18 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		{
 			return ColissionWithAlarm(y, x);
 		}
-
+		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
+		{
+			return ColissionWithMoney(y, x);
+		}
+		if (map[y * mapSize.x + x] == 15 || map[y * mapSize.x + x] == 16)
+		{
+			return ColissionWithMoney(y, x);
+		}
 	}
 
 	return false;
 }
-
 bool TileMap::BreakBrick(int y, int x)
 {
 	map[y * mapSize.x + x] = 0;
@@ -498,6 +580,22 @@ bool TileMap::ColissionWithAlarm(int y, int x)
 	Game::instance().alarm_ring();
 	Game::instance().stop_alarm();
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	return true;
+}
+
+bool TileMap::ColissionWithMoney(int y, int x)
+{
+	if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 15)
+	{
+		map[(y + 1) * mapSize.x + x] = 0;
+	}
+	else if (map[y * mapSize.x + x] == 14 || map[y * mapSize.x + x] == 16)
+	{
+		map[(y - 1) * mapSize.x + x] = 0;
+	}
+	map[y * mapSize.x + x] = 0;
+	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	Game::instance().breakmoney();
 	return true;
 }
 

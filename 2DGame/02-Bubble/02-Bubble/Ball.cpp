@@ -32,11 +32,18 @@ void Ball::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 void Ball::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	Start = true;
-	/*if (Game::instance().getSpecialKey(GLUT_KEY_F1))
+	if(!Start)
+	{
+		glm::ivec2 posPlayer = player->getPosition();
+		posBall.x = posPlayer.x + 2;
+		posBall.y = posPlayer.y - 24;
+		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBall.x), float(tileMapDispl.y + posBall.y)));
+	}
+
+	if (Game::instance().getSpecialKey(GLUT_KEY_F1))
 	{
 		Start = true;
-	}*/
+	}
 	if (Start) {
 
 		posBall += direction * velocity;
@@ -53,13 +60,21 @@ void Ball::update(int deltaTime)
 		else CollisionWithPlayer();
 
 		if (posBall.y > 450) {
-			if (Game::instance().getlevel() == 0) Game::instance().loselife();
+			if (Game::instance().getCurrentRoom() == 0)
+			{
+				if (Game::instance().getlevel() == 0) Game::instance().loselife();
+				Start = false;
+			}
+			else
+			{
+				Game::instance().previousRoom();
+			}
 		}
 		else if (posBall.y < 5)
 		{
 			if (direction.y < 0)
 			{
-				//scene->nextRoom();
+				Game::instance().nextRoom();
 			}
 				
 		}

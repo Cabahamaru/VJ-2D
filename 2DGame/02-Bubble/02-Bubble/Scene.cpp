@@ -39,7 +39,7 @@ Scene::~Scene()
 
 void Scene::init()
 {
-	room = 0;
+	
 	Alarm = false;
 	initShaders();
 
@@ -61,8 +61,12 @@ void Scene::init()
 	{
 		map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 		map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410), texProgram);
+		map2 = TileMap::createTileMap("levels/level03.txt", glm::vec2(SCREEN_X, -820), texProgram);
+		map3 = TileMap::createTileMap("levels/level04.txt", glm::vec2(SCREEN_X, -1230), texProgram);
 		map->setShaderProgram(texProgram);
 		map1->setShaderProgram(texProgram);
+		map2->setShaderProgram(texProgram);
+		map3->setShaderProgram(texProgram);
 	}
 
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -153,13 +157,10 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	//bg->render(imgBg);
 
-	/*if(map->checkRoomChange(ball->getPosition()))
-	{
-	map1->moveTileMap(glm::vec2(32, 32));
-	
-	}*/
 	map->render();
 	map1->render();
+	map2->render();
+	map3->render();
 
 	player->render();
 	ball->render();
@@ -167,10 +168,6 @@ void Scene::render()
 	{
 		guard->render();
 	}
-
-
-
-
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);
 	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
@@ -220,12 +217,72 @@ int Scene::getRoom() {
 void Scene::nextRoom()
 {
 	room++;
-	if(room = 1)
+	if(room == 1)
 	{
-		//map->moveTileMap(glm::vec2(32, 592));
-		//map1->moveTileMap(glm::vec2(32, 32));
+		map->moveTileMap(glm::vec2(32, 592));
+		map1->moveTileMap(glm::vec2(32, 32));
+		map2->moveTileMap(glm::vec2(32, -410));
+		map3->moveTileMap(glm::vec2(32, -820));
+		player->setTileMap(map1);
+		ball->setTileMap(map1);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+	}
+	if(room == 2)
+	{
+		map->moveTileMap(glm::vec2(32, 1184));
+		map1->moveTileMap(glm::vec2(32, 592));
+		map2->moveTileMap(glm::vec2(32, 32));
+		map3->moveTileMap(glm::vec2(32, -410));
+		player->setTileMap(map2);
+		ball->setTileMap(map2);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+	
+	}
+	if (room == 3)
+	{
+		map->moveTileMap(glm::vec2(32, 1776));
+		map1->moveTileMap(glm::vec2(32, 1184));
+		map2->moveTileMap(glm::vec2(32, 592));
+		map3->moveTileMap(glm::vec2(32, 32));
+		player->setTileMap(map3);
+		ball->setTileMap(map3);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
 	}
 }
+void Scene::previousRoom()
+{
+	room--;
+	if (room == 0)
+	{
+		map->moveTileMap(glm::vec2(32, 32));
+		map1->moveTileMap(glm::vec2(32, -410));
+		map2->moveTileMap(glm::vec2(32, -820));
+		player->setTileMap(map);
+		ball->setTileMap(map);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+	}
+	if (room == 1)
+	{
+		map->moveTileMap(glm::vec2(32, 592));
+		map1->moveTileMap(glm::vec2(32, 32));
+		map2->moveTileMap(glm::vec2(32, -410));
+		player->setTileMap(map1);
+		ball->setTileMap(map1);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+	}
+	if (room == 2)
+	{
+		map->moveTileMap(glm::vec2(32, 1184));
+		map1->moveTileMap(glm::vec2(32, 592));
+		map2->moveTileMap(glm::vec2(32, 32));
+		map3->moveTileMap(glm::vec2(32, -410));
+		player->setTileMap(map2);
+		ball->setTileMap(map2);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+	}
+	
+}
+
 
 void Scene::setSound(ISoundEngine* s) {
 	

@@ -144,6 +144,11 @@ void Game::breakbrick() {
 	SoundEngine->setSoundVolume(0.1f);
 	SoundEngine->play2D("sounds/block_break.mp3", false);
 }
+void Game::breakmoney() {
+	money += 100;
+	//SoundEngine->setSoundVolume(0.1f);
+	//SoundEngine->play2D("sounds/block_break.mp3", false);
+}
 
 void Game::alarm_ring() {
 	SoundEngine->setSoundVolume(0.1f);
@@ -157,6 +162,15 @@ void Game::stop_alarm() {
 void Game::catch_key() {
 	SoundEngine->setSoundVolume(0.3f);
 	SoundEngine->play2D("sounds/key.mp3", false);
+}
+
+void Game::nextRoom()
+{
+	scene.nextRoom();
+}
+void Game::previousRoom()
+{
+	scene.previousRoom();
 }
 
 

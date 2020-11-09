@@ -28,7 +28,7 @@ private:
 	Sprite* sprite;
 	TileMap* map;
 	Player* player;
-	//Scene* scene;
+	//Scene scene;
 };
 
 

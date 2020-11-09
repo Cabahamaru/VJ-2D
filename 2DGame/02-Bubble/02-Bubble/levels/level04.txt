@@ -7,17 +7,17 @@ aaaaaaaaaaaaaaaaaa
 a                a
 a                a
 a                a
-a 34434434434434 a
+adddd          ffa
+aeeee          gga
 a                a
-a 4  4  4  4  4  a
-a  33            a
-a  11   33   33  a
-a 351   44   11  a
-a 371   22   123 a
-a  22        123 a
-a  44        22  a
-a  33        44  a
-a            33  a
+addd  111222  fffa
+aeee          ggga
+azzz          zzza
+a                a
+a                a
+a                a
+a                a
+a                a
 a                a
 a                a
 a                a
