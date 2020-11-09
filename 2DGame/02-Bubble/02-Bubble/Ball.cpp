@@ -8,10 +8,7 @@
 #include "scene.h"
 
 bool Start = false;
-int yaux = -2;
-int xaux = -2;
-
-float velocity = 4;
+float velocity = 5;
 glm::vec2 direction = (glm::vec2(0.6f, -1.f));
 
 void Ball::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
@@ -52,6 +49,7 @@ void Ball::update(int deltaTime)
 		{
 			direction.y = -direction.y;
 		}
+
 		else if (map->collisionMoveLeftBall(posBall, glm::ivec2(32, 32)) || map->collisionMoveRightBall(posBall, glm::ivec2(32, 32)))
 		{
 			direction.x = -direction.x;
@@ -59,7 +57,7 @@ void Ball::update(int deltaTime)
 		}
 		else CollisionWithPlayer();
 
-		if (posBall.y > 450) {
+		if (posBall.y > 425) {
 			if (Game::instance().getCurrentRoom() == 0)
 			{
 				if (Game::instance().getlevel() == 0) Game::instance().loselife();
@@ -70,7 +68,7 @@ void Ball::update(int deltaTime)
 				Game::instance().previousRoom();
 			}
 		}
-		else if (posBall.y < 5)
+		else if (posBall.y < 10)
 		{
 			if (direction.y < 0)
 			{
@@ -114,19 +112,20 @@ void Ball::CollisionWithPlayer()
 	int yBall = posBall.y + 23;
 
 	int x0Player = posPlayer.x;
-	int x1Player = posPlayer.x + 32;
+	int x1Player = posPlayer.x + 48;
 
 	int y0Player = posPlayer.y;
 	int y1Player = posPlayer.y + 8;
 
 	if ((x1Ball > x0Player) && (x0Ball < x1Player)) 
 	{
-		if ((y1Player > yBall) && (yBall > y0Player)) 
+		if ((y1Player > yBall) && (yBall > y0Player) && direction.y > 0)
 		{
-			direction.x = ((posBall.x + 12.f) - (posPlayer.x + 24.f)) / 12.f;
+			direction.x = ((posBall.x + 24.f) - (posPlayer.x + 48.f)) / 24.f;
 			direction.y = -1.f;
 			posBall.y += direction.y * velocity;
 			direction = normalize(direction);
+
 		}
 
 	}

@@ -21,7 +21,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
 	spritesheet.loadFromFile("images/platform.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.5,0.5), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(48, 48), glm::vec2(0.5,0.5), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(4);
 	
 		sprite->setAnimationSpeed(MOVE_UP, 8);
@@ -54,7 +54,7 @@ void Player::update(int deltaTime)
 		if(sprite->animation() != MOVE_LEFT)
 			sprite->changeAnimation(MOVE_LEFT);
 		posPlayer.x -= 4;
-		if(map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32)))
+		if(map->collisionMoveLeft(posPlayer, glm::ivec2(48, 48)))
 		{
 			posPlayer.x += 4;
 			sprite->changeAnimation(MOVE_LEFT);
@@ -62,7 +62,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 		{
 			posPlayer.y -= 4;
-			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+			if (map->collisionMoveUp(posPlayer, glm::ivec2(48, 48), &posPlayer.y))
 			{
 				posPlayer.y += 4;
 				sprite->changeAnimation(MOVE_UP);
@@ -71,7 +71,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN)) 
 		{
 			posPlayer.y += 4;
-			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+			if (map->collisionMoveDown(posPlayer, glm::ivec2(48, 48), &posPlayer.y))
 			{
 				posPlayer.y -= 4;
 				sprite->changeAnimation(MOVE_DOWN);
@@ -83,7 +83,7 @@ void Player::update(int deltaTime)
 		if(sprite->animation() != MOVE_RIGHT)
 			sprite->changeAnimation(MOVE_RIGHT);
 		posPlayer.x += 4;
-		if(map->collisionMoveRight(posPlayer, glm::ivec2(32, 32)))
+		if(map->collisionMoveRight(posPlayer, glm::ivec2(48, 48)))
 		{
 			posPlayer.x -= 4;
 			sprite->changeAnimation(MOVE_RIGHT);
@@ -91,7 +91,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 		{
 			posPlayer.y -= 4;
-			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+			if (map->collisionMoveUp(posPlayer, glm::ivec2(48, 48), &posPlayer.y))
 			{
 				posPlayer.y += 4;
 				sprite->changeAnimation(MOVE_UP);
@@ -100,7 +100,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
 		{
 			posPlayer.y += 4;
-			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+			if (map->collisionMoveDown(posPlayer, glm::ivec2(48, 48), &posPlayer.y))
 			{
 				posPlayer.y -= 4;
 				sprite->changeAnimation(MOVE_DOWN);
@@ -113,7 +113,7 @@ void Player::update(int deltaTime)
 		if (sprite->animation() != MOVE_UP)
 			sprite->changeAnimation(MOVE_UP);
 		posPlayer.y -= 4;
-		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+		if (map->collisionMoveUp(posPlayer, glm::ivec2(48, 48), &posPlayer.y))
 		{
 			posPlayer.y += 4;
 			sprite->changeAnimation(MOVE_UP);
@@ -125,7 +125,7 @@ void Player::update(int deltaTime)
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPlayer.y += 4;
-		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), &posPlayer.y))
+		if (map->collisionMoveDown(posPlayer, glm::ivec2(48, 48), &posPlayer.y))
 		{
 			posPlayer.y -= 4;
 			sprite->changeAnimation(MOVE_DOWN);

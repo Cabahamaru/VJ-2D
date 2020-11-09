@@ -267,6 +267,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) c
 	{
 		if(map[y*mapSize.x+x] == 10)
 			return true;
+
 	}
 	
 	return false;
@@ -301,6 +302,10 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		{
 			return true;
 		}
+		if (pos.y > 400)
+		{
+			return true;
+		}
 	}
 	
 	return false;
@@ -321,6 +326,10 @@ bool TileMap::collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int
 			{
 				return true;
 			}
+		}
+		if (pos.y < 40)
+		{
+			return true;
 		}
 		
 	}
@@ -478,7 +487,6 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		{
 			return ColissionWithMoney(y, x);
 		}
-
 	}
 
 	return false;
