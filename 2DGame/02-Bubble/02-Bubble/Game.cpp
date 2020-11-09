@@ -146,8 +146,8 @@ void Game::breakbrick() {
 }
 void Game::breakmoney() {
 	money += 100;
-	//SoundEngine->setSoundVolume(0.1f);
-	//SoundEngine->play2D("sounds/block_break.mp3", false);
+	SoundEngine->setSoundVolume(0.1f);
+	SoundEngine->play2D("sounds/coin.mp3", false);
 }
 
 void Game::alarm_ring() {
