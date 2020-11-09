@@ -53,7 +53,8 @@ public:
 	int getCurrentRoom();
 	void loselife();
 	void breakbrick();
-	void breakmoney();
+	void breakcoin();
+	void breakbag();
 	void alarm_ring();
 	void stop_alarm();
 	void nextRoom();

@@ -42,6 +42,7 @@ void Scene::init()
 
 	points = 0;
 	lives = 3;
+	money = 0;
 
 	soundEngine->stopAllSounds();
 
@@ -146,6 +147,12 @@ void Scene::render()
 
 	std::string pointsStr = std::to_string(points);
 	text.render(pointsStr, glm::vec2(790, 240), 24, glm::vec4(1, 1, 1, 1));
+
+	std::string moneyStr = std::to_string(money);
+	text.render(moneyStr, glm::vec2(790, 100), 24, glm::vec4(1, 1, 1, 1));
+
+	std::string roomStr = std::to_string(room);
+	text.render(roomStr, glm::vec2(790, 600), 24, glm::vec4(1, 1, 1, 1));
 
 }
 
@@ -274,4 +281,8 @@ void Scene::loselife() {
 
 void Scene::addpoints(int x) {
 	points += x;
+}
+
+void Scene::addmoney(int x) {
+	money += x;
 }

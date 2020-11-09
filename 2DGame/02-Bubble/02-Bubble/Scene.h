@@ -37,6 +37,7 @@ public:
 	void previousRoom();
 	void loselife();
 	void addpoints(int x);
+	void addmoney(int x);
 
 private:
 	void initShaders();
@@ -59,6 +60,7 @@ private:
 	unsigned char* strpoints;
 
 	int room = 0;
+	int money = 0;
 	int lives = 4;
 	int points = 0;
 	Text text;

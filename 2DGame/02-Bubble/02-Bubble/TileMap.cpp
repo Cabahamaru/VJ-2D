@@ -588,14 +588,18 @@ bool TileMap::ColissionWithMoney(int y, int x)
 	if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 15)
 	{
 		map[(y + 1) * mapSize.x + x] = 0;
+		if (map[y * mapSize.x + x] == 13) Game::instance().breakcoin();
+		else Game::instance().breakbag();
 	}
+	
 	else if (map[y * mapSize.x + x] == 14 || map[y * mapSize.x + x] == 16)
 	{
 		map[(y - 1) * mapSize.x + x] = 0;
+		if (map[y * mapSize.x + x] == 14) Game::instance().breakcoin();
+		else Game::instance().breakbag();
 	}
 	map[y * mapSize.x + x] = 0;
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	Game::instance().breakmoney();
 	return true;
 }
 
