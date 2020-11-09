@@ -90,7 +90,10 @@ void GameOver::update(int deltaTime)
 
 	if (Game::instance().getKey(13)) {
 		Game::instance().keyReleased(13);
-		if (accion == 0) Game::instance().newaction(0);
+		if (accion == 0) {
+			SoundEngine->stopAllSounds();
+			Game::instance().newaction(0);
+		}
 		else if (accion == 1) {
 			SoundEngine->stopAllSounds();
 			Game::instance().init();
