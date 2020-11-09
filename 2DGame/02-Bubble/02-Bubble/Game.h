@@ -63,8 +63,7 @@ public:
 	
 	void catch_key();
 
-	int getlevel();
-	int getpoints();
+	int getlevel();;
 
 private:
 	bool bPlay;                       // Continue to play game?
@@ -77,7 +76,7 @@ private:
 	                                  // we can have access at any time
 	int state;
 	ISoundEngine* SoundEngine;
-	int level, money, points;
+	int level;
 };
 
 

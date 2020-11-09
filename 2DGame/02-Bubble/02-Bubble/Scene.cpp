@@ -154,6 +154,9 @@ void Scene::render()
 	std::string roomStr = std::to_string(room);
 	text.render(roomStr, glm::vec2(850, 710), 28, glm::vec4(1, 1, 1, 1));
 
+	int bank = Game::instance().getlevel();
+	std::string bankStr = std::to_string(bank);
+	text.render(bankStr, glm::vec2(850, 520), 28, glm::vec4(1, 1, 1, 1));
 }
 
 

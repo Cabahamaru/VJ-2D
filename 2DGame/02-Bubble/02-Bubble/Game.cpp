@@ -11,8 +11,6 @@ void Game::init()
 	bPlay = true;
 	state = 3;
 	level = 0;
-	money = 0;
-	points = 0;
 	SoundEngine = createIrrKlangDevice();
 	if (!SoundEngine)
 	{
@@ -133,10 +131,6 @@ int Game::getlevel()
 {
 	return level;
 
-}
-int Game::getpoints() {
-
-	return points;
 }
 
 void Game::breakbrick() {
