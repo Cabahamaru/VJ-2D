@@ -60,7 +60,7 @@ private:
 
 	int room = 0;
 	int lives = 3;
-	Text* text;
+	Text text;
 
 };
 

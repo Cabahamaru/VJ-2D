@@ -1,2 +1,0 @@
-C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\objs\Win32\Debug\freetype.dll
-C:\Users\JAUME\Documents\GitHub\VJ-2D\libs\freetype-2.10.4\objs\Win32\Debug\freetype.pdb
