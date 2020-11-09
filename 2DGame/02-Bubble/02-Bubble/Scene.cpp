@@ -91,7 +91,7 @@ void Scene::init()
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
 
-	if (!text.init("fonts/emulogic.ttf")) {
+	if (!text.init("fonts/ARCADEPI.ttf")) {
 		cout << "Could not load font!!!" << endl;
 	}
 
@@ -143,20 +143,20 @@ void Scene::render()
 	stats->render(imgStats);
 
 	std::string livesStr = std::to_string(lives);
-	text.render(livesStr, glm::vec2(850, 410), 28, glm::vec4(1, 1, 1, 1));
+	text.render(livesStr, glm::vec2(850, 410), 32, glm::vec4(1, 1, 1, 1));
 
 	std::string pointsStr = std::to_string(points);
-	text.render(pointsStr, glm::vec2(790, 240), 24, glm::vec4(1, 1, 1, 1));
+	text.render(pointsStr, glm::vec2(790, 240), 28, glm::vec4(1, 1, 1, 1));
 
 	std::string moneyStr = std::to_string(money);
-	text.render(moneyStr, glm::vec2(790, 100), 24, glm::vec4(1, 1, 1, 1));
+	text.render(moneyStr, glm::vec2(790, 100), 28, glm::vec4(1, 1, 1, 1));
 
 	std::string roomStr = std::to_string(room);
-	text.render(roomStr, glm::vec2(850, 710), 28, glm::vec4(1, 1, 1, 1));
+	text.render(roomStr, glm::vec2(850, 710), 32, glm::vec4(1, 1, 1, 1));
 
 	int bank = Game::instance().getlevel();
 	std::string bankStr = std::to_string(bank);
-	text.render(bankStr, glm::vec2(850, 520), 28, glm::vec4(1, 1, 1, 1));
+	text.render(bankStr, glm::vec2(850, 520), 32, glm::vec4(1, 1, 1, 1));
 }
 
 
