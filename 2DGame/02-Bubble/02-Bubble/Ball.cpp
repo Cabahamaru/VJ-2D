@@ -40,7 +40,7 @@ void Ball::update(int deltaTime)
 		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBall.x), float(tileMapDispl.y + posBall.y)));
 	}
 
-	if (Game::instance().getSpecialKey(GLUT_KEY_F1))
+	if (Game::instance().getSpecialKey(GLUT_KEY_F1) || Game::instance().getSpecialKey(GLUT_KEY_UP) || Game::instance().getSpecialKey(GLUT_KEY_DOWN))
 	{
 		Start = true;
 	}
