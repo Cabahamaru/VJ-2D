@@ -90,9 +90,9 @@ void Scene::init()
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
 
-	
-	//text->init("fonts/ARCADEPI.ttf");
-	if (!text.init("fonts/ARCADEPI.ttf"))
+	//text.init("fonts/ARCADEPI.ttf");
+	//text->init("fonts/ARCADEPI.ttf");*/
+	if (!text.init("fonts/emulogic.ttf"))
 		//if(!text.init("fonts/OpenSans-Bold.ttf"))
 		//if(!text.init("fonts/DroidSerif.ttf"))
 		cout << "Could not load font!!!" << endl;
@@ -182,7 +182,7 @@ void Scene::render()
 	stats->render(imgStats);
 	//string a = "hola";
     //text->render(a, glm::vec2(32, 32), 22, glm::vec4(1, 0, 0, 1));
-	text.render("Videogames!!!", glm::vec2(32, 32), 16, glm::vec4(1, 1, 1, 1));
+	text.render("aaaaaa", glm::vec2(650, 100), 32, glm::vec4(1, 1, 1, 1));
 }
 
 
