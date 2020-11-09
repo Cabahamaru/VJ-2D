@@ -52,14 +52,13 @@ private:
 	ISoundEngine* soundEngine;
 	float currentTime;
 	glm::mat4 projection;
-	//Text text;
 	TexturedQuad* stats, *bg;
 	Texture imgStats, imgBg;
 	bool Alarm;
 	unsigned char* strpoints;
 
 	int room = 0;
-	int lives = 3;
+	int lives = 4;
 	Text text;
 
 };

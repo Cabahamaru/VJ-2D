@@ -7,8 +7,6 @@
 #include <GL/freeglut.h>
 
 
-
-
 #define SCREEN_X 32
 #define SCREEN_Y 32
 
@@ -39,7 +37,6 @@ Scene::~Scene()
 
 void Scene::init()
 {
-	
 	Alarm = false;
 	initShaders();
 
@@ -90,12 +87,9 @@ void Scene::init()
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
 
-	//text.init("fonts/ARCADEPI.ttf");
-	//text->init("fonts/ARCADEPI.ttf");*/
-	if (!text.init("fonts/emulogic.ttf"))
-		//if(!text.init("fonts/OpenSans-Bold.ttf"))
-		//if(!text.init("fonts/DroidSerif.ttf"))
+	if (!text.init("fonts/emulogic.ttf")) {
 		cout << "Could not load font!!!" << endl;
+	}
 
 }
 
@@ -121,38 +115,9 @@ void drawString(float x, float y, char* string) {
 	}
 }
 
-void RenderString(float x, float y, void* font, const char* string)
-{
-//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	
-	glRasterPos2f(x, y);
-	//glColor3i(1.0, 0.0, 0.0);
-	//glColor3f(1,1,1);
-	//glColor3b(1, 1, 1);
-	//glColor3d(1.0,1.0,1.0);
-	glColor3ub(1, 1, 1);
-	glDisable(GL_LIGHTING);
-	//glDisable(GL_TEXTURE);
-	//glDisable(GL_FOG);
-	glutBitmapString(font, (const unsigned char*)string);
-}
 
 void Scene::render()
 {
-	std::string s = std::to_string(lives);
-	char const* c = s.c_str();
-	RenderString(32, 80, GLUT_BITMAP_HELVETICA_18, c);
-	/*glColor3f(1, 1, 1);
-	glRasterPos2f(32, 32);
-	string str = "some text";
-	for (int i = 0; i < (int)str.length(); i++)
-	{
-		char c = str[i];
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, c);
-	}*/
-
-	
 	glm::mat4 modelview;
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);
@@ -160,7 +125,7 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
-	//bg->render(imgBg);
+	bg->render(imgBg);
 
 	map->render();
 	map1->render();
@@ -180,9 +145,9 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	stats->render(imgStats);
-	//string a = "hola";
-    //text->render(a, glm::vec2(32, 32), 22, glm::vec4(1, 0, 0, 1));
-	text.render("aaaaaa", glm::vec2(650, 100), 32, glm::vec4(1, 1, 1, 1));
+
+	std::string livesStr = std::to_string(lives);
+	text.render(livesStr, glm::vec2(850, 410), 32, glm::vec4(1, 1, 1, 1));
 }
 
 
@@ -289,12 +254,10 @@ void Scene::previousRoom()
 	
 }
 
-
 void Scene::setSound(ISoundEngine* s) {
 	
 	soundEngine = s;
 }
-
 
 void Scene::loselife() {
 	if (lives > 0) {
