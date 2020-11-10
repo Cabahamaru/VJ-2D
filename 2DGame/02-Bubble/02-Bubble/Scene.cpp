@@ -168,6 +168,10 @@ void Scene::render()
 	int bank = Game::instance().getlevel();
 	std::string bankStr = std::to_string(bank);
 	text.render(bankStr, glm::vec2(850, 520), 32, glm::vec4(1, 1, 1, 1));
+
+	if (Game::instance().I_AM_GOD()) {
+		text.render("GOD MODE", glm::vec2(770, 620), 28, glm::vec4(1, 1, 1, 1));
+	}
 }
 
 
@@ -319,16 +323,18 @@ void Scene::setSound(ISoundEngine* s) {
 }
 
 void Scene::loselife() {
-	if (lives > 0) {
-		player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-		ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
-		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-		map->setAlarmStatus(false);
-		--lives;
-	}
-	else {
+	if (!Game::instance().I_AM_GOD()) {
+		if (lives > 0) {
+			player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+			ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
+			guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+			map->setAlarmStatus(false);
+			--lives;
+		}
+		else {
 
-		Game::instance().newaction(4);
+			Game::instance().newaction(4);
+		}
 	}
 }
 
@@ -338,4 +344,18 @@ void Scene::addpoints(int x) {
 
 void Scene::addmoney(int x) {
 	money += x;
+}
+
+void Scene::GOD_get_key() {
+	if (room == 0) map->ColissionWithKey(-10,-10);
+	else if (room == 1) map1->ColissionWithKey(-10, -10);
+	else if (room == 2) map2->ColissionWithKey(-10, -10);
+	else if (room == 3) map3->ColissionWithKey(-10, -10);
+}
+
+void Scene::GOD_break_bricks() {
+	if (room == 0) map->GOD_break_bricks();
+	else if (room == 1) map1->GOD_break_bricks();
+	else if (room == 2) map2->GOD_break_bricks();
+	else if (room == 3) map3->GOD_break_bricks();
 }

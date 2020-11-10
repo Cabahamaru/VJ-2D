@@ -44,6 +44,7 @@ public:
 	bool ColissionWithAlarm(int y, int x);
 	bool ColissionWithMoney(int y, int x);
 	bool BreakBrick(int y, int x);
+	void GOD_break_bricks();
 
 	void setShaderProgram(ShaderProgram program);
 

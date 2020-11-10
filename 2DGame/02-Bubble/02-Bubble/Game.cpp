@@ -9,6 +9,7 @@ using namespace irrklang;
 void Game::init()
 { 
 	bPlay = true;
+	GOD_MODE = false;
 	state = 3;
 	level = 0;
 	SoundEngine = createIrrKlangDevice();
@@ -49,7 +50,15 @@ void Game::render()
 void Game::keyPressed(int key)
 {
 	if(key == 27) // Escape code
-		bPlay = false;
+		if (state != 3) {
+			init();
+			//newaction(3);
+		}
+		else bPlay = false;
+	if (getSpecialKey(GLUT_KEY_F5)) GOD_MODE = !GOD_MODE;
+	if (key == 'g') GOD_MODE = !GOD_MODE;
+	if (GOD_MODE && key == 'k') scene.GOD_get_key();
+	if (GOD_MODE && key == 'b') scene.GOD_break_bricks();
 	keys[key] = true;
 }
 
@@ -172,6 +181,10 @@ void Game::nextRoom()
 void Game::previousRoom()
 {
 	scene.previousRoom();
+}
+
+bool Game::I_AM_GOD() {
+	return GOD_MODE;
 }
 
 

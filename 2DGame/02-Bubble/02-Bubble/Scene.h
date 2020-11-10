@@ -39,6 +39,8 @@ public:
 	void loselife();
 	void addpoints(int x);
 	void addmoney(int x);
+	void GOD_get_key();
+	void GOD_break_bricks();
 
 private:
 	void initShaders();

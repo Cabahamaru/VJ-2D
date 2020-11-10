@@ -302,7 +302,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		{
 			return true;
 		}
-		if (pos.y > 400)
+		if (pos.y > 385)
 		{
 			return true;
 		}
@@ -548,7 +548,7 @@ bool TileMap::BreakBrick(int y, int x)
 {
 	map[y * mapSize.x + x] = 0;
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	Game::instance().breakbrick();
+	if (!Game::instance().I_AM_GOD()) Game::instance().breakbrick();
 	return true;
 }
 
@@ -638,6 +638,28 @@ bool TileMap::checkRoomChange(const glm::vec2& ballpos)
 		return true;
 }
 
+void TileMap::GOD_break_bricks() {
+	for (int x = 0; x < 18; ++x) {
+		for (int y = 0; y < 28; ++y) {
+			if (map[y * mapSize.x + x] == 1)
+			{
+				BreakBrick(y, x);
+			}
+			if (map[y * mapSize.x + x] == 2)
+			{
+				BreakBrick(y, x);
+			}
+			if (map[y * mapSize.x + x] == 3)
+			{
+				BreakBrick(y, x);
+			}
+			if (map[y * mapSize.x + x] == 4)
+			{
+				BreakBrick(y, x);
+			}
+		}
+	}
+}
 
 
 

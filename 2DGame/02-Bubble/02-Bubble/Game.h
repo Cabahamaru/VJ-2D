@@ -58,6 +58,7 @@ public:
 	void alarm_ring();
 	void stop_alarm();
 	void nextRoom();
+	bool I_AM_GOD();
 
 	void previousRoom();
 	
@@ -77,6 +78,7 @@ private:
 	int state;
 	ISoundEngine* SoundEngine;
 	int level;
+	bool GOD_MODE;
 };
 
 
