@@ -32,5 +32,8 @@ private:
 	TileMap* map;
 	Player* player;
 	Shoot* shot;
+
+	bool statenormal;
+	bool staterage;
 };
 #endif // _BOSS_INCLUDE

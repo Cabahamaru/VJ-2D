@@ -22,6 +22,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	ball = NULL;
+	boss = NULL;
 }
 
 Scene::~Scene()
@@ -32,6 +33,8 @@ Scene::~Scene()
 		delete player;
 	if (ball != NULL)
 		delete ball;
+	if (boss != NULL)
+		delete boss;
 }
 
 

@@ -11,13 +11,11 @@
 
 
 int counter = 0;
-bool statenormal = true;
-bool staterage = false;
 int bossdirection = 0;
 int bossLives = 8;
 int shotcounter = 0;
-
 int current = 0;
+
 enum BossAnims
 {
 	NORMAL_1, NORMAL_2, NORMAL_3, RAGE_1, RAGE_2, RAGE_3, HIT_1, HIT_2
@@ -27,6 +25,10 @@ enum BossAnims
 void Boss::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
 	bossLives = 8;
+	counter = 0;
+	current = 0;
+	statenormal = true;
+	staterage = false;
 	spritesheet.loadFromFile("images/boss.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(128, 128), glm::vec2(0.25, 0.5), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(8);
