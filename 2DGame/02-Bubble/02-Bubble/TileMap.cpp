@@ -105,6 +105,14 @@ bool TileMap::loadLevel(const string &levelFile)
 				map[j * mapSize.x + i] = 15; //Money $ bolsa dinero parte superior
 			else if (tile == 'g')
 				map[j * mapSize.x + i] = 16; //Money $ bolsa dinero parte inferior
+			else if (tile == 'h')
+				map[j * mapSize.x + i] = 20; //bloque amarillo claro
+			else if (tile == 'i')
+				map[j * mapSize.x + i] = 21; //bloque rosa
+			else if (tile == 'j')
+				map[j * mapSize.x + i] = 22; //bloque rosa/azul 2 hits
+			else if (tile == 'k')
+				map[j * mapSize.x + i] = 23; //bloque rosa 3 hits
 			else
 				map[j*mapSize.x+i] = tile - int('0');
 		}
@@ -187,6 +195,34 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
 					texCoordTile[0] = glm::vec2(0.75f, 0.0f);
 					texCoordTile[1] = glm::vec2(1.f, 0.125f);
+					aux = true;
+				}
+				else if (tile == 20) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.5f, 0.0f);
+					texCoordTile[1] = glm::vec2(0.75f, 0.125f);
+					aux = true;
+				}
+				else if (tile == 21) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.5f, 0.125f);
+					texCoordTile[1] = glm::vec2(0.75f, 0.25f);
+					aux = true;
+				}
+				else if (tile == 22) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.75f, 0.5f);
+					texCoordTile[1] = glm::vec2(1.f, 0.625f);
+					aux = true;
+				}
+				else if (tile == 23) {
+					nTiles++;
+					posTile = glm::vec2(minCoords.x + i * tileSize, minCoords.y + j * tileSize / 2);
+					texCoordTile[0] = glm::vec2(0.75f, 0.625f);
+					texCoordTile[1] = glm::vec2(1.f, 0.75f);
 					aux = true;
 				}
 				else if (tile == 1) {
@@ -383,6 +419,24 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 		{
 			return ColissionWithMoney(y, x);
 		}
+		if (map[y * mapSize.x + x] == 20 || map[y * mapSize.x + x] == 21)
+		{
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 22)
+		{
+			map[y * mapSize.x + x] = 21;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 23)
+		{
+			map[y * mapSize.x + x] = 22;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
+		}
 	}
 
 	return false;
@@ -433,6 +487,24 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 		if (map[y * mapSize.x + x] == 15 || map[y * mapSize.x + x] == 16)
 		{
 			return ColissionWithMoney(y, x);
+		}
+		if (map[y * mapSize.x + x] == 20 || map[y * mapSize.x + x] == 21)
+		{
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 22)
+		{
+			map[y * mapSize.x + x] = 21;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 23)
+		{
+			map[y * mapSize.x + x] = 22;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
 		}
 			
 	}
@@ -487,6 +559,24 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		{
 			return ColissionWithMoney(y, x);
 		}
+		if (map[y * mapSize.x + x] == 20 || map[y * mapSize.x + x] == 21)
+		{
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 22)
+		{
+			map[y * mapSize.x + x] = 21;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 23)
+		{
+			map[y * mapSize.x + x] = 22;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
+		}
 	}
 
 	return false;
@@ -539,6 +629,24 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		if (map[y * mapSize.x + x] == 15 || map[y * mapSize.x + x] == 16)
 		{
 			return ColissionWithMoney(y, x);
+		}
+		if (map[y * mapSize.x + x] == 20 || map[y * mapSize.x + x] == 21)
+		{
+			return BreakBrick(y, x);
+		}
+		if (map[y * mapSize.x + x] == 22)
+		{
+			map[y * mapSize.x + x] = 21;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
+		}
+		if (map[y * mapSize.x + x] == 23)
+		{
+			map[y * mapSize.x + x] = 22;
+			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			return true;
 		}
 	}
 

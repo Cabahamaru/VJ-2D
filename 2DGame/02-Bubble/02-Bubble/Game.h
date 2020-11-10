@@ -52,6 +52,7 @@ public:
 	void newaction(int act);
 	int getCurrentRoom();
 	void loselife();
+	void breakhardbrick();
 	void breakbrick();
 	void breakcoin();
 	void breakbag();
