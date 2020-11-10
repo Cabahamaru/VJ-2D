@@ -12,7 +12,7 @@
 int counterShot = 0;
 int currentShot = 0;
 glm::vec2 shotdirection = (glm::vec2(0.0f, 0.0f));
-int shootSpeed = 1;
+
 enum ShotAnims
 {
 	SHOT_1, SHOT_2, SHOT_3, SHOT_4, SHOT_5, SHOT_6, SHOT_7, SHOT_8
@@ -20,7 +20,7 @@ enum ShotAnims
 
 void Shoot::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
-
+	shootSpeed = 1;
 	spritesheet.loadFromFile("images/shot.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(0.125,1), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(8);
@@ -57,6 +57,7 @@ void Shoot::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 
 void Shoot::update(int deltaTime)
 {
+	shootSpeed = 1;
 	sprite->update(deltaTime);
 	++counterShot;
 	if (counterShot > 30) {
@@ -86,6 +87,12 @@ void Shoot::update(int deltaTime)
 	posShot.y += shotdirection.y * shootSpeed;
 	if(hitPlayer())
 	{
+		shootSpeed = 0;
+		sprite->changeAnimation(4);
+		sprite->changeAnimation(5);
+		sprite->changeAnimation(6);
+		sprite->changeAnimation(7);
+
 		Game::instance().loselife();
 	}
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posShot.x), float(tileMapDispl.y + posShot.y)));

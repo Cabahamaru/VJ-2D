@@ -13,7 +13,7 @@
 int counter = 0;
 int bossdirection = 0;
 int bossLives = 8;
-int shotcounter = 0;
+int shotcounter = 200;
 int current = 0;
 
 enum BossAnims
@@ -68,7 +68,7 @@ void Boss::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 	++counter;
-	if(bossLives <=4)
+	if(bossLives <= 4)
 	{
 		statenormal = false;
 		staterage = true;
@@ -76,7 +76,7 @@ void Boss::update(int deltaTime)
 	}
 	if (counter > 30) {
 
-		if(statenormal)
+		if (statenormal)
 		{
 			if(current == 0)
 			{
@@ -94,14 +94,14 @@ void Boss::update(int deltaTime)
 				current = 0;
 			}
 		}
-		if (staterage)
+		else
 		{
 			if(current == 0 || current ==1 || current==2)
 			{
 				sprite->changeAnimation(3);
 				current = 3;
 			}
-			else if (current == 3)
+			if (current == 3)
 			{
 				sprite->changeAnimation(4);
 				current++;

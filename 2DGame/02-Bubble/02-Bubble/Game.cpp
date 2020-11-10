@@ -133,9 +133,11 @@ int Game::getCurrentRoom() {
 }
 
 void Game::loselife() {
-	SoundEngine->setSoundVolume(0.1f);
-	SoundEngine->play2D("sounds/lose_life.mp3", false);
-	scene.loselife();
+	if (!GOD_MODE) {
+		SoundEngine->setSoundVolume(0.1f);
+		SoundEngine->play2D("sounds/lose_life.mp3", false);
+		scene.loselife();
+	}
 }
 
 int Game::getlevel()

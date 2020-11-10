@@ -29,5 +29,6 @@ private:
 	Sprite* sprite;
 	TileMap* map;
 	Player* player;
+	int shootSpeed;
 };
 #endif // _SHOOT_INCLUDE
