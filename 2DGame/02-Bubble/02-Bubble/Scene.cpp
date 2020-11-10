@@ -64,10 +64,12 @@ void Scene::init()
 		map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410), texProgram);
 		map2 = TileMap::createTileMap("levels/level03.txt", glm::vec2(SCREEN_X, -820), texProgram);
 		map3 = TileMap::createTileMap("levels/level04.txt", glm::vec2(SCREEN_X, -1230), texProgram);
+		map4boss = TileMap::createTileMap("levels/level05Boss.txt", glm::vec2(SCREEN_X, -1640), texProgram);
 		map->setShaderProgram(texProgram);
 		map1->setShaderProgram(texProgram);
 		map2->setShaderProgram(texProgram);
 		map3->setShaderProgram(texProgram);
+		map4boss->setShaderProgram(texProgram);
 	}
 
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -91,6 +93,12 @@ void Scene::init()
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
 
+	boss = new Boss();
+	boss->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	boss->setPosition(glm::vec2(100, 75));
+	boss->setTileMap(map4boss);
+	boss->setPlayer(player);
+
 	if (!text.init("fonts/ARCADEPI.ttf")) {
 		cout << "Could not load font!!!" << endl;
 	}
@@ -103,6 +111,7 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	player->update(deltaTime);
 	ball->update(deltaTime);
+	boss->update(deltaTime);
 
 	if(map->getAlarmStatus() == true)
 	{
@@ -127,9 +136,11 @@ void Scene::render()
 	map1->render();
 	map2->render();
 	map3->render();
-
+	map4boss->render();
 	player->render();
 	ball->render();
+	if(room==4)
+		boss->render();
 	if (map->getAlarmStatus() == true)
 	{
 		guard->render();
@@ -203,8 +214,10 @@ void Scene::nextRoom()
 		map1->moveTileMap(glm::vec2(32, 32));
 		map2->moveTileMap(glm::vec2(32, -410));
 		map3->moveTileMap(glm::vec2(32, -820));
+		map4boss->moveTileMap(glm::vec2(32, -1230));
 		player->setTileMap(map1);
 		ball->setTileMap(map1);
+		boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
 	}
 	if(room == 2)
@@ -213,8 +226,10 @@ void Scene::nextRoom()
 		map1->moveTileMap(glm::vec2(32, 592));
 		map2->moveTileMap(glm::vec2(32, 32));
 		map3->moveTileMap(glm::vec2(32, -410));
+		map4boss->moveTileMap(glm::vec2(32, -820));
 		player->setTileMap(map2);
 		ball->setTileMap(map2);
+		boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
 	
 	}
@@ -224,9 +239,24 @@ void Scene::nextRoom()
 		map1->moveTileMap(glm::vec2(32, 1184));
 		map2->moveTileMap(glm::vec2(32, 592));
 		map3->moveTileMap(glm::vec2(32, 32));
+		map4boss->moveTileMap(glm::vec2(32, -410));
 		player->setTileMap(map3);
 		ball->setTileMap(map3);
+		boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+	}
+	if (room == 4)
+	{
+		map->moveTileMap(glm::vec2(32, 2368));
+		map1->moveTileMap(glm::vec2(32, 1776));
+		map2->moveTileMap(glm::vec2(32, 1184));
+		map3->moveTileMap(glm::vec2(32, 592));
+		map4boss->moveTileMap(glm::vec2(32, 32));
+		player->setTileMap(map4boss);
+		ball->setTileMap(map4boss);
+		boss->setTileMap(map4boss);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+	
 	}
 }
 void Scene::previousRoom()
@@ -237,8 +267,11 @@ void Scene::previousRoom()
 		map->moveTileMap(glm::vec2(32, 32));
 		map1->moveTileMap(glm::vec2(32, -410));
 		map2->moveTileMap(glm::vec2(32, -820));
+		map3->moveTileMap(glm::vec2(32, -1230));
+		map4boss->moveTileMap(glm::vec2(32, -1640));
 		player->setTileMap(map);
 		ball->setTileMap(map);
+		boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
 	}
 	if (room == 1)
@@ -246,8 +279,11 @@ void Scene::previousRoom()
 		map->moveTileMap(glm::vec2(32, 592));
 		map1->moveTileMap(glm::vec2(32, 32));
 		map2->moveTileMap(glm::vec2(32, -410));
+		map3->moveTileMap(glm::vec2(32, -820));
+		map4boss->moveTileMap(glm::vec2(32, -1230));
 		player->setTileMap(map1);
 		ball->setTileMap(map1);
+		boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
 	}
 	if (room == 2)
@@ -256,8 +292,22 @@ void Scene::previousRoom()
 		map1->moveTileMap(glm::vec2(32, 592));
 		map2->moveTileMap(glm::vec2(32, 32));
 		map3->moveTileMap(glm::vec2(32, -410));
+		map4boss->moveTileMap(glm::vec2(32, -820));
 		player->setTileMap(map2);
 		ball->setTileMap(map2);
+		boss->setTileMap(map4boss);
+		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+	}
+	if (room == 3)
+	{
+		map->moveTileMap(glm::vec2(32, 1776));
+		map1->moveTileMap(glm::vec2(32, 1184));
+		map2->moveTileMap(glm::vec2(32, 592));
+		map3->moveTileMap(glm::vec2(32, 32));
+		map4boss->moveTileMap(glm::vec2(32, -410));
+		player->setTileMap(map3);
+		ball->setTileMap(map3);
+		boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
 	}
 	

@@ -7,6 +7,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "Ball.h"
+#include "Boss.h"
 #include "Guard.h"
 #include "Text.h"
 #include "Texture.h"
@@ -47,9 +48,11 @@ private:
 	TileMap* map1;
 	TileMap* map2;
 	TileMap* map3;
+	TileMap* map4boss;
 	Player *player;
 	Ball *ball;
 	Guard* guard;
+	Boss* boss;
 	ShaderProgram texProgram;
 	ISoundEngine* soundEngine;
 	float currentTime;
