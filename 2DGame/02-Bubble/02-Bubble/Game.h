@@ -63,6 +63,8 @@ public:
 	void previousRoom();
 
 	void nextLevel();
+
+	void previousLevel();
 	
 	void catch_key();
 

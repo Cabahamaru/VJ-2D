@@ -61,6 +61,9 @@ void Game::keyPressed(int key)
 	if (GOD_MODE && key == 'b') scene.GOD_break_bricks();
 	if (GOD_MODE && key == 'n') scene.GOD_next_room();
 	if (GOD_MODE && key == 'p') scene.GOD_previous_room();
+	if (GOD_MODE && key == 'l') nextLevel();
+	if (GOD_MODE && key == 'j') previousLevel();
+
 	keys[key] = true;
 }
 
@@ -186,9 +189,25 @@ void Game::previousRoom()
 	scene.previousRoom();
 }
 void Game::nextLevel()
+{	
+	if (level == 2) {
+		//there is no next level
+	}
+	else {
+		++level;
+		scene.nextLevel();
+	}
+}
+
+void Game::previousLevel()
 {
-	++level;
-	scene.nextLevel();
+	if (level == 0) {
+		//there is no previous level
+	}
+	else {
+		--level;
+		scene.nextLevel();
+	}
 }
 
 bool Game::I_AM_GOD() {

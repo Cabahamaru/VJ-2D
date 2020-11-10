@@ -92,7 +92,7 @@ void Shoot::update(int deltaTime)
 		sprite->changeAnimation(5);
 		sprite->changeAnimation(6);
 		sprite->changeAnimation(7);
-
+		posShot.x = -100;
 		Game::instance().loselife();
 	}
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posShot.x), float(tileMapDispl.y + posShot.y)));
