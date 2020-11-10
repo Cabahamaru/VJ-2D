@@ -661,6 +661,17 @@ void TileMap::GOD_break_bricks() {
 	}
 }
 
+void TileMap::GOD_break_key() {
+	for (int x = 0; x < 18; ++x) {
+		for (int y = 0; y < 28; ++y) {
+			if (map[y * mapSize.x + x] == 5 || map[y * mapSize.x + x] == 7)
+			{
+				ColissionWithKey(y,x);
+			}
+		}
+	}
+}
+
 
 
 

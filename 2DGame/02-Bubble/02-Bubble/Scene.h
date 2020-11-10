@@ -9,6 +9,7 @@
 #include "Ball.h"
 #include "Boss.h"
 #include "Guard.h"
+#include "Shoot.h"
 #include "Text.h"
 #include "Texture.h"
 #include "TexturedQuad.h"
@@ -44,6 +45,10 @@ public:
 
 	void nextLevel();
 
+	void GOD_next_room();
+
+	void GOD_previous_room();
+
 private:
 	void initShaders();
 
@@ -57,6 +62,7 @@ private:
 	Ball *ball;
 	Guard* guard;
 	Boss* boss;
+	Shoot* shot;
 	ShaderProgram texProgram;
 	ISoundEngine* soundEngine;
 	float currentTime;

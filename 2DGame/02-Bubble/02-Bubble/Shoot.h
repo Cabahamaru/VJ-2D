@@ -1,12 +1,11 @@
-
-#ifndef _BOSS_INCLUDE
-#define _BOSS_INCLUDE
+#ifndef _SHOOT_INCLUDE
+#define _SHOOT_INCLUDE
 
 #include "Sprite.h"
 #include "TileMap.h"
 #include "Player.h"
-#include "Shoot.h"
-class Boss
+
+class Shoot
 {
 public:
 	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram);
@@ -18,19 +17,17 @@ public:
 	glm::vec2 getPosition();
 	void setPlayer(Player* p);
 
-	void setShot(Shoot* p);
+	void setShotdirection(glm::vec2 posPlayer);
 
-	void setbossdirection(int d);
-
-	void bossHit();
+	bool hitPlayer();
+	
 
 private:
-	glm::ivec2 tileMapDispl, posBoss;
+	glm::ivec2 tileMapDispl, posShot;
 	int startY;
 	Texture spritesheet;
 	Sprite* sprite;
 	TileMap* map;
 	Player* player;
-	Shoot* shot;
 };
-#endif // _BOSS_INCLUDE
+#endif // _SHOOT_INCLUDE

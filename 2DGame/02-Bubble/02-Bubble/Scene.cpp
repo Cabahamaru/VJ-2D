@@ -43,6 +43,7 @@ void Scene::init()
 	points = 0;
 	lives = 3;
 	money = 0;
+	room = 0;
 
 	soundEngine->stopAllSounds();
 
@@ -92,11 +93,16 @@ void Scene::init()
 	player->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH +150 - 1), float(SCREEN_HEIGHT- 1), 0.f);
 	
+	shot = new Shoot();
+	shot->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	shot->setPlayer(player);
+
 	boss = new Boss();
 	boss->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	boss->setPosition(glm::vec2(-200, 0));
 	boss->setTileMap(map4boss);
 	boss->setPlayer(player);
+	boss->setShot(shot);
 
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -111,6 +117,7 @@ void Scene::init()
 	guard->setPlayer(player);
 
 	
+	
 	if (!text.init("fonts/ARCADEPI.ttf")) {
 		cout << "Could not load font!!!" << endl;
 	}
@@ -123,13 +130,15 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	player->update(deltaTime);
 	ball->update(deltaTime);
-	boss->update(deltaTime);
+	if (room == 4)
+		boss->update(deltaTime);
 
 	if(map->getAlarmStatus() == true)
 	{
 		guard->update(deltaTime);
 	}
-	
+	if (room == 4)
+		shot->update(deltaTime);
 }
 
 
@@ -157,6 +166,8 @@ void Scene::render()
 	{
 		guard->render();
 	}
+	if (room == 4)
+		shot->render();
 	texProgram.use();
 	texProgram.setUniformMatrix4f("projection", projection);
 	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
@@ -174,10 +185,10 @@ void Scene::render()
 	std::string moneyStr = std::to_string(money);
 	text.render(moneyStr, glm::vec2(790, 100), 28, glm::vec4(1, 1, 1, 1));
 
-	std::string roomStr = std::to_string(room);
+	std::string roomStr = std::to_string(room+1);
 	text.render(roomStr, glm::vec2(850, 710), 32, glm::vec4(1, 1, 1, 1));
 
-	int bank = Game::instance().getlevel();
+	int bank = Game::instance().getlevel()+1;
 	std::string bankStr = std::to_string(bank);
 	text.render(bankStr, glm::vec2(850, 520), 32, glm::vec4(1, 1, 1, 1));
 
@@ -361,10 +372,10 @@ void Scene::addmoney(int x) {
 }
 
 void Scene::GOD_get_key() {
-	if (room == 0) map->ColissionWithKey(-10,-10);
-	else if (room == 1) map1->ColissionWithKey(-10, -10);
-	else if (room == 2) map2->ColissionWithKey(-10, -10);
-	else if (room == 3) map3->ColissionWithKey(-10, -10);
+	if (room == 0) map->GOD_break_key();
+	else if (room == 1) map1->GOD_break_key();
+	else if (room == 2) map2->GOD_break_key();
+	else if (room == 3) map3->GOD_break_key();
 }
 
 void Scene::GOD_break_bricks() {
@@ -378,4 +389,30 @@ void Scene::nextLevel()
 {
 	room = 0;
 	init();
+}
+
+void Scene::GOD_next_room()
+{
+	if (room == 4) {
+		// there's no next room
+	}
+	else
+	{
+		player->resetPlayer();
+		ball->resetBall();
+		nextRoom();
+	}
+}
+
+void Scene::GOD_previous_room()
+{
+	if(room ==0)
+	{
+		// there's no previous room
+	}
+	else {
+		player->resetPlayer();
+		ball->resetBall();
+		previousRoom();
+	}
 }

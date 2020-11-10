@@ -9,11 +9,13 @@
 #include "scene.h"
 
 
+
 int counter = 0;
 bool statenormal = true;
 bool staterage = false;
 int bossdirection = 0;
 int bossLives = 8;
+int shotcounter = 0;
 
 int current = 0;
 enum BossAnims
@@ -64,6 +66,12 @@ void Boss::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 	++counter;
+	if(bossLives <=4)
+	{
+		statenormal = false;
+		staterage = true;
+		current = 3;
+	}
 	if (counter > 30) {
 
 		if(statenormal)
@@ -84,9 +92,14 @@ void Boss::update(int deltaTime)
 				current = 0;
 			}
 		}
-		else if (staterage)
+		if (staterage)
 		{
-			if (current == 3)
+			if(current == 0 || current ==1 || current==2)
+			{
+				sprite->changeAnimation(3);
+				current = 3;
+			}
+			else if (current == 3)
 			{
 				sprite->changeAnimation(4);
 				current++;
@@ -114,6 +127,16 @@ void Boss::update(int deltaTime)
 		bossdirection = -bossdirection;
 	}
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBoss.x), float(tileMapDispl.y + posBoss.y)));
+
+	++shotcounter;
+	if(shotcounter > 200)
+	{
+		shot->setPosition(glm::vec2(float(tileMapDispl.x + posBoss.x), float(tileMapDispl.y + posBoss.y+100)));
+		glm::vec2 posPlayer = player->getPosition();
+		shot->setShotdirection(posPlayer);
+		shotcounter = 0;
+	}
+
 }
 
 void Boss::render()
@@ -138,6 +161,11 @@ glm::vec2 Boss::getPosition()
 
 void Boss::setPlayer(Player* p) {
 	player = p;
+}
+
+void Boss::setShot(Shoot* p)
+{
+	shot = p;
 }
 
 void Boss::setbossdirection(int d)

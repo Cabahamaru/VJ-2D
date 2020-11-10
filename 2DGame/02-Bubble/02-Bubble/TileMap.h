@@ -46,6 +46,8 @@ public:
 	bool BreakBrick(int y, int x);
 	void GOD_break_bricks();
 
+	void GOD_break_key();
+
 	void setShaderProgram(ShaderProgram program);
 
 	bool getAlarmStatus();

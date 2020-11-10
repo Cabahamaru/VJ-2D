@@ -59,6 +59,8 @@ void Game::keyPressed(int key)
 	if (key == 'g') GOD_MODE = !GOD_MODE;
 	if (GOD_MODE && key == 'k') scene.GOD_get_key();
 	if (GOD_MODE && key == 'b') scene.GOD_break_bricks();
+	if (GOD_MODE && key == 'n') scene.GOD_next_room();
+	if (GOD_MODE && key == 'p') scene.GOD_previous_room();
 	keys[key] = true;
 }
 
