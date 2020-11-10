@@ -5,7 +5,7 @@
 
 #include "Sprite.h"
 #include "TileMap.h"
-//#include "Scene.h"
+#include "Boss.h"
 #include "Player.h"
 class Ball
 {
@@ -19,7 +19,13 @@ public:
 	glm::vec2 getPosition();
 	void setPlayer(Player *p);
 
+	void setBoss(Boss* b);
+
+	void resetBall();
+
 	void CollisionWithPlayer();
+
+	void CollisionWithBoss();
 
 private:
 	glm::ivec2 tileMapDispl, posBall;
@@ -28,7 +34,7 @@ private:
 	Sprite* sprite;
 	TileMap* map;
 	Player* player;
-	//Scene scene;
+	Boss* boss;
 };
 
 

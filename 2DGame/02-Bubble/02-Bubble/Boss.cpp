@@ -12,7 +12,7 @@
 int counter = 0;
 bool statenormal = true;
 bool staterage = false;
-int bossdirection = 2;
+int bossdirection = 0;
 
 int current = 0;
 enum BossAnims
@@ -131,4 +131,9 @@ glm::vec2 Boss::getPosition()
 
 void Boss::setPlayer(Player* p) {
 	player = p;
+}
+
+void Boss::setbossdirection(int d)
+{
+	bossdirection = d;
 }

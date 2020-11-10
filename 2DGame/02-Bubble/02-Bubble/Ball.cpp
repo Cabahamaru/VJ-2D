@@ -7,6 +7,9 @@
 #include "Player.h"
 #include "scene.h"
 
+#define INIT_BALL_X_TILES 10
+#define INIT_BALL_Y_TILES 9
+
 bool Start = false;
 float velocity = 5;
 glm::vec2 direction = (glm::vec2(0.6f, -1.f));
@@ -50,12 +53,16 @@ void Ball::update(int deltaTime)
 			direction.y = -direction.y;
 		}
 
-		else if (map->collisionMoveLeftBall(posBall, glm::ivec2(32, 32)) || map->collisionMoveRightBall(posBall, glm::ivec2(32, 32)))
+		if (map->collisionMoveLeftBall(posBall, glm::ivec2(32, 32)) || map->collisionMoveRightBall(posBall, glm::ivec2(32, 32)))
 		{
 			direction.x = -direction.x;
 
 		}
-		else CollisionWithPlayer();
+		CollisionWithPlayer();
+		CollisionWithBoss();
+		
+		
+		
 
 		if (posBall.y > 425) {
 			if (Game::instance().getCurrentRoom() == 0)
@@ -131,6 +138,47 @@ void Ball::CollisionWithPlayer()
 	}
 }
 
+void Ball::CollisionWithBoss()
+{
+	glm::ivec2 posBoss = boss->getPosition();
+	int x0Ball = posBall.x;
+	int x1Ball = posBall.x + 23;
+
+	int yBall = posBall.y + 23;
+
+	int x0Boss = posBoss.x;
+	int x1Boss = posBoss.x + 128;
+
+	int y0Boss = posBoss.y;
+	int y1Boss = posBoss.y + 128;
+
+	if ((x1Ball > x0Boss) && (x0Ball < x1Boss))
+	{
+		if ((y1Boss > yBall) && (yBall > y0Boss) && direction.y < 0)
+		{
+			direction.x = ((posBall.x + 64.f) - (posBoss.x + 128.f)) / 64.f;
+			direction.y = -1.f;
+			posBall.y += direction.y * velocity;
+			direction = normalize(direction);
+
+		}
+
+	}
+}
+
 void Ball::setPlayer(Player* p) {
 	player = p;
+}
+
+
+void Ball::setBoss(Boss* b) {
+	boss = b;
+}
+
+void Ball::resetBall()
+{
+	posBall = glm::vec2(INIT_BALL_X_TILES * 32, INIT_BALL_Y_TILES * 32);
+	sprite->setPosition(glm::vec2(INIT_BALL_X_TILES * 32, INIT_BALL_Y_TILES * 32));
+	Start = false;
+
 }
