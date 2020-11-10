@@ -128,11 +128,18 @@ void Ball::CollisionWithPlayer()
 	{
 		if ((y1Player > yBall) && (yBall > y0Player) && direction.y > 0)
 		{
-			direction.x = ((posBall.x + 24.f) - (posPlayer.x + 48.f)) / 24.f;
-			direction.y = -1.f;
-			posBall.y += direction.y * velocity;
-			direction = normalize(direction);
-
+			if(Game::instance().I_AM_GOD())
+			{
+				direction = glm::vec2(0.0f, -1.0f);
+				posBall.y += direction.y * velocity;
+			}
+			else 
+			{
+				direction.x = ((posBall.x + 24.f) - (posPlayer.x + 48.f)) / 24.f;
+				direction.y = -1.f;
+				posBall.y += direction.y * velocity;
+				direction = normalize(direction);
+			}
 		}
 
 	}
@@ -144,12 +151,12 @@ void Ball::CollisionWithBoss()
 	int x0Ball = posBall.x;
 	int x1Ball = posBall.x + 23;
 
-	int yBall = posBall.y + 23;
+	int yBall = posBall.y;
 
 	int x0Boss = posBoss.x;
 	int x1Boss = posBoss.x + 128;
 
-	int y0Boss = posBoss.y;
+	int y0Boss = posBoss.y + 118;
 	int y1Boss = posBoss.y + 128;
 
 	if ((x1Ball > x0Boss) && (x0Ball < x1Boss))
@@ -157,7 +164,7 @@ void Ball::CollisionWithBoss()
 		if ((y1Boss > yBall) && (yBall > y0Boss) && direction.y < 0)
 		{
 			direction.x = ((posBall.x + 64.f) - (posBoss.x + 128.f)) / 64.f;
-			direction.y = -1.f;
+			direction.y = -direction.y;
 			posBall.y += direction.y * velocity;
 			direction = normalize(direction);
 			boss->bossHit();
