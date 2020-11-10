@@ -39,7 +39,7 @@ void Scene::init()
 {
 	Alarm = false;
 	initShaders();
-
+	
 	points = 0;
 	lives = 3;
 	money = 0;
@@ -73,11 +73,11 @@ void Scene::init()
 	}
 	if (Game::instance().getlevel() == 1)
 	{
-		map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-		map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410), texProgram);
-		map2 = TileMap::createTileMap("levels/level03.txt", glm::vec2(SCREEN_X, -820), texProgram);
-		map3 = TileMap::createTileMap("levels/level04.txt", glm::vec2(SCREEN_X, -1230), texProgram);
-		map4boss = TileMap::createTileMap("levels/level05Boss.txt", glm::vec2(SCREEN_X, -1640), texProgram);
+		map = TileMap::createTileMap("levels/level11.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+		map1 = TileMap::createTileMap("levels/level12.txt", glm::vec2(SCREEN_X, -410), texProgram);
+		map2 = TileMap::createTileMap("levels/level13.txt", glm::vec2(SCREEN_X, -820), texProgram);
+		map3 = TileMap::createTileMap("levels/level14.txt", glm::vec2(SCREEN_X, -1230), texProgram);
+		map4boss = TileMap::createTileMap("levels/level15Boss.txt", glm::vec2(SCREEN_X, -1640), texProgram);
 		map->setShaderProgram(texProgram);
 		map1->setShaderProgram(texProgram);
 		map2->setShaderProgram(texProgram);
@@ -86,10 +86,6 @@ void Scene::init()
 	
 	}
 
-	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	//map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410 ), texProgram);
-	//map->setShaderProgram(texProgram);
-	//map1->setShaderProgram(texProgram);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
@@ -376,4 +372,10 @@ void Scene::GOD_break_bricks() {
 	else if (room == 1) map1->GOD_break_bricks();
 	else if (room == 2) map2->GOD_break_bricks();
 	else if (room == 3) map3->GOD_break_bricks();
+}
+
+void Scene::nextLevel()
+{
+	room = 0;
+	init();
 }

@@ -61,6 +61,8 @@ public:
 	bool I_AM_GOD();
 
 	void previousRoom();
+
+	void nextLevel();
 	
 	void catch_key();
 

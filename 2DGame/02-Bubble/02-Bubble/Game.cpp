@@ -139,7 +139,6 @@ void Game::loselife() {
 int Game::getlevel()
 {
 	return level;
-
 }
 
 void Game::breakbrick() {
@@ -181,6 +180,11 @@ void Game::nextRoom()
 void Game::previousRoom()
 {
 	scene.previousRoom();
+}
+void Game::nextLevel()
+{
+	++level;
+	scene.nextLevel();
 }
 
 bool Game::I_AM_GOD() {

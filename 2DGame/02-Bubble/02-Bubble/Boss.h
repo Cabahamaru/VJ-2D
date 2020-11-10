@@ -19,6 +19,8 @@ public:
 
 	void setbossdirection(int d);
 
+	void bossHit();
+
 private:
 	glm::ivec2 tileMapDispl, posBoss;
 	int startY;

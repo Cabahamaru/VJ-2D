@@ -13,20 +13,21 @@ int counter = 0;
 bool statenormal = true;
 bool staterage = false;
 int bossdirection = 0;
+int bossLives = 8;
 
 int current = 0;
 enum BossAnims
 {
-	NORMAL_1, NORMAL_2, NORMAL_3, RAGE_1, RAGE_2, RAGE_3
+	NORMAL_1, NORMAL_2, NORMAL_3, RAGE_1, RAGE_2, RAGE_3, HIT_1, HIT_2
 };
 
 
 void Boss::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
-
+	bossLives = 8;
 	spritesheet.loadFromFile("images/boss.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(128, 128), glm::vec2(0.25, 0.5), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(6);
+	sprite->setNumberAnimations(8);
 
 	sprite->setAnimationSpeed(NORMAL_1, 8);
 	sprite->addKeyframe(NORMAL_1, glm::vec2(0.f, 0.f));
@@ -45,6 +46,12 @@ void Boss::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 
 	sprite->setAnimationSpeed(RAGE_3, 8);
 	sprite->addKeyframe(RAGE_3, glm::vec2(0.5f, 0.5f));
+
+	sprite->setAnimationSpeed(HIT_1, 8);
+	sprite->addKeyframe(HIT_1, glm::vec2(0.75f, 0.0f));
+
+	sprite->setAnimationSpeed(HIT_2, 8);
+	sprite->addKeyframe(HIT_2, glm::vec2(0.75f, 0.5f));
 
 	sprite->changeAnimation(0);
 
@@ -136,4 +143,24 @@ void Boss::setPlayer(Player* p) {
 void Boss::setbossdirection(int d)
 {
 	bossdirection = d;
+}
+
+void Boss::bossHit()
+{
+	bossLives--;
+	if (bossLives > 0)
+	{
+		if (statenormal)
+			sprite->changeAnimation(6);
+		else if (staterage)
+			sprite->changeAnimation(7);
+	}
+	else
+	{
+		//boss die
+		//cridar so game
+		//cridar animacio canvi level
+		Game::instance().nextLevel();
+	}
+
 }

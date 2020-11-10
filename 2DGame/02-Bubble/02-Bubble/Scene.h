@@ -42,6 +42,8 @@ public:
 	void GOD_get_key();
 	void GOD_break_bricks();
 
+	void nextLevel();
+
 private:
 	void initShaders();
 

@@ -160,7 +160,7 @@ void Ball::CollisionWithBoss()
 			direction.y = -1.f;
 			posBall.y += direction.y * velocity;
 			direction = normalize(direction);
-
+			boss->bossHit();
 		}
 
 	}
