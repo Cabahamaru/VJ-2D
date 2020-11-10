@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Game.h"
 
+#define INIT_PLAYER_X_TILES 10
+#define INIT_PLAYER_Y_TILES 10
 
 #define JUMP_ANGLE_STEP 4
 #define JUMP_HEIGHT 96
@@ -164,6 +166,12 @@ void Player::setPosition(const glm::vec2 &pos)
 glm::ivec2 Player::getPosition()
 {
 	return posPlayer;
+}
+
+void Player::resetPlayer()
+{
+	posPlayer = glm::vec2(INIT_PLAYER_X_TILES * 32, INIT_PLAYER_Y_TILES * 32);
+	sprite->setPosition(glm::vec2(INIT_PLAYER_X_TILES * 32, INIT_PLAYER_Y_TILES * 32));
 }
 
 

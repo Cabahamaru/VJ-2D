@@ -71,6 +71,20 @@ void Scene::init()
 		map3->setShaderProgram(texProgram);
 		map4boss->setShaderProgram(texProgram);
 	}
+	if (Game::instance().getlevel() == 1)
+	{
+		map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+		map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410), texProgram);
+		map2 = TileMap::createTileMap("levels/level03.txt", glm::vec2(SCREEN_X, -820), texProgram);
+		map3 = TileMap::createTileMap("levels/level04.txt", glm::vec2(SCREEN_X, -1230), texProgram);
+		map4boss = TileMap::createTileMap("levels/level05Boss.txt", glm::vec2(SCREEN_X, -1640), texProgram);
+		map->setShaderProgram(texProgram);
+		map1->setShaderProgram(texProgram);
+		map2->setShaderProgram(texProgram);
+		map3->setShaderProgram(texProgram);
+		map4boss->setShaderProgram(texProgram);
+	
+	}
 
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	//map1 = TileMap::createTileMap("levels/level02.txt", glm::vec2(SCREEN_X, -410 ), texProgram);
@@ -82,23 +96,25 @@ void Scene::init()
 	player->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH +150 - 1), float(SCREEN_HEIGHT- 1), 0.f);
 	
+	boss = new Boss();
+	boss->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	boss->setPosition(glm::vec2(-200, 0));
+	boss->setTileMap(map4boss);
+	boss->setPlayer(player);
+
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball->setPosition(glm::vec2(INIT_BALL_X_TILES * map->getTileSize(), INIT_BALL_Y_TILES * map->getTileSize()));
 	ball->setTileMap(map);
 	ball->setPlayer(player);
+	ball->setBoss(boss);
 	currentTime = 0.0f;
 
 	guard = new Guard();
 	guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	guard->setPlayer(player);
 
-	boss = new Boss();
-	boss->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	boss->setPosition(glm::vec2(100, 75));
-	boss->setTileMap(map4boss);
-	boss->setPlayer(player);
-
+	
 	if (!text.init("fonts/ARCADEPI.ttf")) {
 		cout << "Could not load font!!!" << endl;
 	}
@@ -259,8 +275,10 @@ void Scene::nextRoom()
 		player->setTileMap(map4boss);
 		ball->setTileMap(map4boss);
 		boss->setTileMap(map4boss);
-		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
-	
+		player->resetPlayer();
+		ball->resetBall();
+		boss->setPosition(glm::vec2(100, 50));
+		boss->setbossdirection(1);
 	}
 }
 void Scene::previousRoom()

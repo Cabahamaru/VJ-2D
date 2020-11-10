@@ -17,7 +17,8 @@ public:
 	glm::vec2 getPosition();
 	void setPlayer(Player* p);
 
-	//void CollisionWithPlayer();
+	void setbossdirection(int d);
+
 private:
 	glm::ivec2 tileMapDispl, posBoss;
 	int startY;
