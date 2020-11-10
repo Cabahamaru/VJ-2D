@@ -4,19 +4,19 @@ TILEMAP
 images/tilesheet.png 	-- Tilesheet
 4 8 							-- Number of tiles in tilesheet
 aaaaaaaaaaaaaaaaaa
-a                a
-a       5        a
-a       7        a
-adddd          ffa
-aeeee          gga
-a                a
-addd  111222  fffa
-aeee          ggga
-azzz          zzza
-a                a
-a                a
-a                a
-a                a
+a   4444444444   a
+a111          111a
+afd            dfa
+age            ega
+afdd          ddfa
+agee          eega
+afff          fffa
+aggg          ggga
+azzz22  11  22zzza
+azzz11  22  11zzza
+a  d            da
+a  e1           ea
+a  11          11a
 a                a
 a                a
 a                a

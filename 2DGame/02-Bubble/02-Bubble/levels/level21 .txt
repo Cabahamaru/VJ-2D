@@ -7,20 +7,20 @@ aaaaaaaaaaaaaaaaaa
 a                a
 a                a
 a                a
+a   z        z   a
+a    z      z    a
+a     z    z     a
+a     5          a
+a     73333      a
+a      3333      a
+a     z    z     a
+a    z      z    a
+a   z        z   a
+a  z          z  a
+a z            z a
+az              za
 a                a
-a 1            1 a
-a 3            3 a
-a 1            1 a
-azz  11111111  zza
-a 5  22222222    a
-a 7  23232323    a
-a    33333333    a
-a    23232323    a
-a    22222222    a
-a 1  zz    zz  1 a
-a 3            3 a
-a 1            1 a
-azz            zza
+a                a
 a                a
 a                a
 a                a
