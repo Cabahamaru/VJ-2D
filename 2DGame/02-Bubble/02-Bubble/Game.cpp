@@ -34,6 +34,7 @@ bool Game::update(int deltaTime)
 	else if (state == 4) gameover.update(deltaTime);
 	else if (state == 5) nextL.update(deltaTime);
 	else if (state == 6) bossT.update(deltaTime);
+	else if (state == 7) win.update(deltaTime);
 	
 	return bPlay;
 }
@@ -49,6 +50,7 @@ void Game::render()
 	else if (state == 4) gameover.render();
 	else if (state == 5) nextL.render();
 	else if (state == 6) bossT.render();
+	else if (state == 7) win.render();
 }
 
 void Game::keyPressed(int key)
@@ -68,6 +70,7 @@ void Game::keyPressed(int key)
 	if (GOD_MODE && key == 'l') nextLevel();
 	if (GOD_MODE && key == 'j') previousLevel();
 	if (GOD_MODE && key == 'm') scene.GOD_get_money();
+	if (GOD_MODE && key == 'r') scene.reset();
 
 	keys[key] = true;
 }
@@ -147,6 +150,11 @@ void Game::newaction(int act)
 		state = 0;
 		scene.nextRoom();
 	}
+	else if (act == 7) {
+		state = 7;
+		SoundEngine->stopAllSounds();
+		win.init();
+	}
 }
 
 int Game::getCurrentRoom() {
@@ -175,6 +183,11 @@ void Game::breakbrick() {
 	scene.addpoints(100);
 	SoundEngine->setSoundVolume(0.1f);
 	if (!GOD_MODE) SoundEngine->play2D("sounds/block_break.mp3", false);
+}
+
+void Game::soundwithwall(){
+	SoundEngine->setSoundVolume(0.1f);
+	SoundEngine->play2D("sounds/block_break.mp3", false);
 }
 
 void Game::breakcoin() {

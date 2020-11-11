@@ -12,7 +12,7 @@
 
 int counter = 0;
 int bossdirection = 0;
-int bossLives = 8;
+int bossLives =8;
 int shotcounter = 0;
 int current = 0;
 
@@ -68,6 +68,10 @@ void Boss::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 
 void Boss::update(int deltaTime)
 {
+	if (bossLives <= 0)
+	{
+		Game::instance().newaction(7);
+	}
 	sprite->update(deltaTime);
 	++counter;
 	if(bossLives <= 4 && statenormal)

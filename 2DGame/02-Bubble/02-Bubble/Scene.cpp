@@ -565,3 +565,9 @@ void Scene::setmoney(int m)
 {
 	money = m;
 }
+
+void Scene::reset()
+{
+	ball->resetBall();
+	player->resetPlayer();
+}

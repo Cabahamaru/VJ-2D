@@ -363,7 +363,7 @@ bool TileMap::collisionMoveUp(const glm::ivec2& pos, const glm::ivec2& size, int
 				return true;
 			}
 		}
-		if (pos.y < 40)
+		if (pos.y < 45)
 		{
 			return true;
 		}
@@ -383,8 +383,10 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 	y1 = (pos.y -4 + size.y - 1) / (tileSize/2);
 	for (int y = y0; y <= y1; y++)
 	{
-		if (map[y * mapSize.x + x] == 10)
+		if (map[y * mapSize.x + x] == 10) {
+			Game::instance().soundwithwall();
 			return true;
+		}
 		if (map[y * mapSize.x + x] == 17)
 			return true;
 		if (map[y * mapSize.x + x] == 1)
@@ -453,8 +455,10 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 	y1 = (pos.y - 4 + size.y - 1) / (tileSize/2);
 	for (int y = y0; y <= y1; y++)
 	{
-		if (map[y * mapSize.x + x] == 10)
+		if (map[y * mapSize.x + x] == 10) {
+			Game::instance().soundwithwall();
 			return true;
+		}
 		if (map[y * mapSize.x + x] == 17)
 			return true;
 		if (map[y * mapSize.x + x] == 1) 
@@ -533,6 +537,7 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		}
 		if (map[y * mapSize.x + x] == 10)
 		{
+			Game::instance().soundwithwall();
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 2)
@@ -606,6 +611,7 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		}
 		if (map[y * mapSize.x + x] == 10)
 		{
+			Game::instance().soundwithwall();
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 2)

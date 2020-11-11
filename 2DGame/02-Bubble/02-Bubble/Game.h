@@ -9,7 +9,9 @@
 #include "GameOver.h"
 #include "LevelTransition.h"
 #include "BossTransition.h"
+#include "Win.h"
 #include <irrKlang.h>
+
 #pragma comment(lib, "irrKlang.lib")
 
 using namespace irrklang;
@@ -56,6 +58,7 @@ public:
 	void loselife();
 	void breakhardbrick();
 	void breakbrick();
+	void soundwithwall();
 	void breakcoin();
 	void breakbag();
 	void alarm_ring();
@@ -82,6 +85,7 @@ private:
 	GameOver gameover;
 	LevelTransition nextL;
 	BossTransition bossT;
+	Win win;
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
 	int state;

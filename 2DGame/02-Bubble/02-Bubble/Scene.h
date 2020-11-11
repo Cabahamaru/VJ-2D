@@ -45,6 +45,7 @@ public:
 	void setlives(int l);
 	void setpoints(int p);
 	void setmoney(int m);
+	void reset();
 	int getmoney();
 	void GOD_get_key();
 	void GOD_break_bricks();

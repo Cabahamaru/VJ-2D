@@ -66,8 +66,12 @@ void Ball::update(int deltaTime)
 		{
 			direction.y = -direction.y;
 		}
+		if(posBall.y >405 && Game::instance().I_AM_GOD())
+		{
+			direction.y = -direction.y;
+		}
 
-		else if (posBall.y > 425) {
+		else if (posBall.y > 410) {
 			if (Game::instance().getCurrentRoom() == 0)
 			{
 				Game::instance().loselife();
