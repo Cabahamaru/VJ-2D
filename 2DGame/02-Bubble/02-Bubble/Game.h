@@ -7,6 +7,7 @@
 #include "credits.h"
 #include "Instruccions.h"
 #include "GameOver.h"
+#include "LevelTransition.h"
 #include <irrKlang.h>
 #pragma comment(lib, "irrKlang.lib")
 
@@ -78,6 +79,7 @@ private:
 	Credits credits;
 	Instruccions inst;
 	GameOver gameover;
+	LevelTransition nextL;
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
 	int state;

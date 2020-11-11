@@ -32,6 +32,7 @@ bool Game::update(int deltaTime)
 	else if (state == 1) inst.update(deltaTime);
 	else if (state == 2) credits.update(deltaTime);
 	else if (state == 4) gameover.update(deltaTime);
+	else if (state == 5) nextL.update(deltaTime);
 	
 	return bPlay;
 }
@@ -45,6 +46,7 @@ void Game::render()
 	else if (state == 1) inst.render();
 	else if (state == 2) credits.render();
 	else if (state == 4) gameover.render();
+	else if (state == 5) nextL.render();
 }
 
 void Game::keyPressed(int key)
@@ -129,6 +131,12 @@ void Game::newaction(int act)
 	else if (act == 4) { //pantalla de game over
 		SoundEngine->stopAllSounds();
 		gameover.init();
+	}
+	else if (act == 5){
+		SoundEngine->stopAllSounds();
+		state = 0;
+		//scene.init();
+		scene.nextLevel();
 	}
 }
 
@@ -219,7 +227,13 @@ void Game::nextLevel()
 	}
 	else {
 		++level;
-		scene.nextLevel();
+		state = 5;
+		SoundEngine->stopAllSounds();
+		SoundEngine->setSoundVolume(0.4f);
+		SoundEngine->play2D("sounds/level_transition.mp3", false);
+		nextL.setScene(scene);
+		nextL.init();
+		//scene.nextLevel();
 	}
 }
 

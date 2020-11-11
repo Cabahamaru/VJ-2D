@@ -65,6 +65,19 @@ void Scene::init()
 	sc_bg = TexturedQuad::createTexturedQuad(geom3, texCoords3, texProgram);
 	imgScBg.loadFromFile("images/room_background.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	imgScBg.setMagFilter(GL_NEAREST);
+
+	glm::vec2 geom4[2] = { glm::vec2(0.f, 0.f), glm::vec2(640.f, 0 + 480.f) };
+	glm::vec2 texCoords4[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
+	nextlevel1 = TexturedQuad::createTexturedQuad(geom4, texCoords4, texProgram);
+	imgnextlevel1.loadFromFile("images/next_level1.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	imgnextlevel1.setMagFilter(GL_NEAREST);
+
+	glm::vec2 geom5[2] = { glm::vec2(0.f, 0.f), glm::vec2(640.f, 0 + 480.f) };
+	glm::vec2 texCoords5[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
+	nextlevel2 = TexturedQuad::createTexturedQuad(geom5, texCoords5, texProgram);
+	imgnextlevel2.loadFromFile("images/next_level2.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	imgnextlevel2.setMagFilter(GL_NEAREST);
+
 	
 	
 	if(Game::instance().getlevel() == 0)
@@ -481,6 +494,8 @@ void Scene::GOD_get_money() {
 
 void Scene::nextLevel()
 {
+	
+	//leveltransition = true;
 	room = 0;
 	init();
 }
@@ -528,4 +543,11 @@ void Scene::GOD_previous_room()
 
 int Scene::getmoney() {
 	return money;
+}
+
+int Scene::getlives() {
+	return lives;
+}
+int Scene::getpoints() {
+	return points;
 }

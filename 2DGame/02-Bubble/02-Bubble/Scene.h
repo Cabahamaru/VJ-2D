@@ -40,6 +40,8 @@ public:
 	void loselife();
 	void addpoints(int x);
 	void addmoney(int x);
+	int getlives();
+	int getpoints();
 	int getmoney();
 	void GOD_get_key();
 	void GOD_break_bricks();
@@ -69,8 +71,8 @@ private:
 	ISoundEngine* soundEngine;
 	float currentTime;
 	glm::mat4 projection;
-	TexturedQuad* stats, *bg, *sc_bg;
-	Texture imgStats, imgBg, imgScBg;
+	TexturedQuad* stats, * bg, * sc_bg, * nextlevel1 , *nextlevel2;
+	Texture imgStats, imgBg, imgScBg, imgnextlevel1 , imgnextlevel2;
 	bool Alarm;
 	unsigned char* strpoints;
 
@@ -78,6 +80,7 @@ private:
 	int money = 0;
 	int lives = 4;
 	int points = 0;
+	bool leveltransition = false;
 	Text text;
 
 };
