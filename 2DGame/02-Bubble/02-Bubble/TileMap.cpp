@@ -781,6 +781,22 @@ void TileMap::GOD_break_bricks() {
 			{
 				BreakBrick(y, x);
 			}
+			if (map[y * mapSize.x + x] == 20)
+			{
+				BreakBrick(y, x);
+			}
+			if (map[y * mapSize.x + x] == 21)
+			{
+				BreakBrick(y, x);
+			}
+			if (map[y * mapSize.x + x] == 22)
+			{
+				BreakBrick(y, x);
+			}
+			if (map[y * mapSize.x + x] == 23)
+			{
+				BreakBrick(y, x);
+			}
 		}
 	}
 }
