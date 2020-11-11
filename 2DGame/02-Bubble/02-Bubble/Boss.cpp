@@ -13,7 +13,7 @@
 int counter = 0;
 int bossdirection = 0;
 int bossLives = 8;
-int shotcounter = 200;
+int shotcounter = 0;
 int current = 0;
 
 enum BossAnims
@@ -32,7 +32,7 @@ void Boss::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 	statenormal = true;
 	staterage = false;
 	spritesheet.loadFromFile("images/boss.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(128, 128), glm::vec2(0.25, 0.5), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(110, 142), glm::vec2(0.25, 0.5), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(8);
 
 	sprite->setAnimationSpeed(NORMAL_1, 8);
@@ -70,11 +70,12 @@ void Boss::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 	++counter;
-	if(bossLives <= 4)
+	if(bossLives <= 4 && statenormal)
 	{
 		statenormal = false;
 		staterage = true;
 		current = 3;
+		bossdirection = 3;
 	}
 	if (counter > 30) {
 
@@ -135,7 +136,11 @@ void Boss::update(int deltaTime)
 	++shotcounter;
 	if(shotcounter > 200)
 	{
-		shot->setPosition(glm::vec2(float(tileMapDispl.x + posBoss.x), float(tileMapDispl.y + posBoss.y+100)));
+		shot->setPosition(glm::vec2(float(tileMapDispl.x + posBoss.x), float(tileMapDispl.y + posBoss.y+110)));
+		if(statenormal)
+			shot->setShotSpeed(1);
+		else if(staterage)
+			shot->setShotSpeed(2);
 		glm::vec2 posPlayer = player->getPosition();
 		shot->setShotdirection(posPlayer);
 		shotcounter = 0;

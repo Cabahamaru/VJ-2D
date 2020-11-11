@@ -8,6 +8,7 @@
 #include "Instruccions.h"
 #include "GameOver.h"
 #include "LevelTransition.h"
+#include "BossTransition.h"
 #include <irrKlang.h>
 #pragma comment(lib, "irrKlang.lib")
 
@@ -80,6 +81,7 @@ private:
 	Instruccions inst;
 	GameOver gameover;
 	LevelTransition nextL;
+	BossTransition bossT;
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
 	int state;

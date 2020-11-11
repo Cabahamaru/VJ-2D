@@ -57,7 +57,7 @@ void Shoot::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 
 void Shoot::update(int deltaTime)
 {
-	shootSpeed = 1;
+	//shootSpeed = 1;
 	sprite->update(deltaTime);
 	++counterShot;
 	if (counterShot > 30) {
@@ -131,7 +131,7 @@ void Shoot::setShotdirection(glm::vec2 posPlayer)
 }
 void Shoot::setShotSpeed(int s)
 {
-	shootSpeed = 1;
+	shootSpeed = s;
 }
 
 bool Shoot::hitPlayer()

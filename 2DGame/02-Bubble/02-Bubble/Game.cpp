@@ -33,6 +33,7 @@ bool Game::update(int deltaTime)
 	else if (state == 2) credits.update(deltaTime);
 	else if (state == 4) gameover.update(deltaTime);
 	else if (state == 5) nextL.update(deltaTime);
+	else if (state == 6) bossT.update(deltaTime);
 	
 	return bPlay;
 }
@@ -47,6 +48,7 @@ void Game::render()
 	else if (state == 2) credits.render();
 	else if (state == 4) gameover.render();
 	else if (state == 5) nextL.render();
+	else if (state == 6) bossT.render();
 }
 
 void Game::keyPressed(int key)
@@ -138,6 +140,12 @@ void Game::newaction(int act)
 		//scene.init();
 		scene.nextLevel();
 	}
+	else if (act == 6) {
+		SoundEngine->stopAllSounds();
+		state = 0;
+		//scene.init();
+		scene.nextRoom();
+	}
 }
 
 int Game::getCurrentRoom() {
@@ -214,7 +222,18 @@ void Game::catch_key() {
 
 void Game::nextRoom()
 {
-	scene.nextRoom();
+	if(level == 2 && scene.getRoom()==3)
+	{
+		state = 6;
+		SoundEngine->stopAllSounds();
+		//SoundEngine->setSoundVolume(0.4f);
+		//SoundEngine->play2D("sounds/level_transition.mp3", false);
+		bossT.init();
+	}
+	else {
+		scene.nextRoom();
+	}
+	
 }
 void Game::previousRoom()
 {
