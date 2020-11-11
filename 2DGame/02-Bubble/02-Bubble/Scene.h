@@ -40,8 +40,10 @@ public:
 	void loselife();
 	void addpoints(int x);
 	void addmoney(int x);
+	int getmoney();
 	void GOD_get_key();
 	void GOD_break_bricks();
+	void GOD_get_money();
 
 	void nextLevel();
 

@@ -425,6 +425,13 @@ void Scene::GOD_break_bricks() {
 	else if (room == 3) map3->GOD_break_bricks();
 }
 
+void Scene::GOD_get_money() {
+	if (room == 0) map->GOD_get_money();
+	else if (room == 1) map1->GOD_get_money();
+	else if (room == 2) map2->GOD_get_money();
+	else if (room == 3) map3->GOD_get_money();
+}
+
 void Scene::nextLevel()
 {
 	room = 0;
@@ -470,4 +477,8 @@ void Scene::GOD_previous_room()
 		ball->resetBall();
 		previousRoom();
 	}
+}
+
+int Scene::getmoney() {
+	return money;
 }

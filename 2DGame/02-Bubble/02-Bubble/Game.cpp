@@ -63,6 +63,7 @@ void Game::keyPressed(int key)
 	if (GOD_MODE && key == 'p') scene.GOD_previous_room();
 	if (GOD_MODE && key == 'l') nextLevel();
 	if (GOD_MODE && key == 'j') previousLevel();
+	if (GOD_MODE && key == 'm') scene.GOD_get_money();
 
 	keys[key] = true;
 }
@@ -162,13 +163,15 @@ void Game::breakbrick() {
 void Game::breakcoin() {
 	scene.addmoney(100);
 	SoundEngine->setSoundVolume(0.1f);
-	SoundEngine->play2D("sounds/coin.mp3", false);
+	if (!GOD_MODE) SoundEngine->play2D("sounds/coin.mp3", false);
+	if (level == 0 && scene.getmoney() == 2800) nextLevel();
 }
 
 void Game::breakbag() {
 	scene.addmoney(200);
 	SoundEngine->setSoundVolume(0.2f);
-	SoundEngine->play2D("sounds/bagcoins.mp3", false);
+	if (!GOD_MODE) SoundEngine->play2D("sounds/bagcoins.mp3", false);
+	if (level == 0 && scene.getmoney() == 2800) nextLevel();
 }
 
 void Game::alarm_ring() {

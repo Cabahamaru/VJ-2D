@@ -48,6 +48,8 @@ public:
 
 	void GOD_break_key();
 
+	void GOD_get_money();
+
 	void setShaderProgram(ShaderProgram program);
 
 	bool getAlarmStatus();
