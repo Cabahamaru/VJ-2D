@@ -140,7 +140,9 @@ void Boss::update(int deltaTime)
 		if(statenormal)
 			shot->setShotSpeed(1);
 		else if(staterage)
+		{
 			shot->setShotSpeed(2);
+		}
 		glm::vec2 posPlayer = player->getPosition();
 		shot->setShotdirection(posPlayer);
 		shotcounter = 0;

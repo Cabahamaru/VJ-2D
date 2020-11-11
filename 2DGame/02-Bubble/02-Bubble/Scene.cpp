@@ -130,6 +130,7 @@ void Scene::init()
 	
 	shot = new Shoot();
 	shot->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	shot->setPosition(glm::ivec2(-200, 0));
 	shot->setPlayer(player);
 
 	/*boss = new Boss();
@@ -342,7 +343,7 @@ void Scene::nextRoom()
 
 			boss = new Boss();
 			boss->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-			boss->setPosition(glm::vec2(100, 40));
+			boss->setPosition(glm::vec2(100, 20));
 			boss->setTileMap(map4boss);
 			boss->setPlayer(player);
 			boss->setShot(shot);
@@ -550,4 +551,17 @@ int Scene::getlives() {
 }
 int Scene::getpoints() {
 	return points;
+}
+void Scene::setlives(int l)
+{
+	lives = l;
+}
+
+void Scene::setpoints(int p)
+{
+	points = p;
+}
+void Scene::setmoney(int m)
+{
+	money = m;
 }

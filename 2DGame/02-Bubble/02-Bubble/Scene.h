@@ -42,6 +42,9 @@ public:
 	void addmoney(int x);
 	int getlives();
 	int getpoints();
+	void setlives(int l);
+	void setpoints(int p);
+	void setmoney(int m);
 	int getmoney();
 	void GOD_get_key();
 	void GOD_break_bricks();

@@ -132,6 +132,10 @@ void Game::newaction(int act)
 	}
 	else if (act == 4) { //pantalla de game over
 		SoundEngine->stopAllSounds();
+		level = 0;
+		scene.setlives(4);
+		scene.setmoney(0);
+		scene.setpoints(0);
 		gameover.init();
 	}
 	else if (act == 5){
