@@ -409,6 +409,8 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 		}
 		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
 		{
+			if (Alarm)
+				return true;
 			return ColissionWithAlarm(y, x);
 		}
 		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
@@ -478,6 +480,8 @@ bool TileMap::collisionMoveRightBall(const glm::ivec2& pos, const glm::ivec2& si
 		}
 		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
 		{
+			if (Alarm)
+				return true;
 			return ColissionWithAlarm(y, x);
 		}
 		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
@@ -549,6 +553,8 @@ bool TileMap::collisionMoveDownBall(const glm::ivec2& pos, const glm::ivec2& siz
 		}
 		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
 		{
+			if (Alarm)
+				return true;
 			return ColissionWithAlarm(y, x);
 		}
 		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
@@ -620,6 +626,8 @@ bool TileMap::collisionMoveUpBall(const glm::ivec2& pos, const glm::ivec2& size,
 		}
 		if (map[y * mapSize.x + x] == 11 || map[y * mapSize.x + x] == 12)
 		{
+			if (Alarm)
+				return true;
 			return ColissionWithAlarm(y, x);
 		}
 		if (map[y * mapSize.x + x] == 13 || map[y * mapSize.x + x] == 14)
@@ -699,15 +707,15 @@ bool TileMap::ColissionWithKey(int y, int x)
 
 bool TileMap::ColissionWithAlarm(int y, int x)
 {
-	if (map[y * mapSize.x + x] == 11)
+	/*if (map[y * mapSize.x + x] == 11)
 	{
-		map[(y + 1) * mapSize.x + x] = 0;
+		map[(y + 1) * mapSize.x + x] = 11;
 	}
 	else if (map[y * mapSize.x + x] == 12)
 	{
-		map[(y - 1) * mapSize.x + x] = 0;
-	}
-	map[y * mapSize.x + x] = 0;
+		map[(y - 1) * mapSize.x + x] = 12;
+	}*/
+	//map[y * mapSize.x + x] = 0;
 	Alarm = true;
 	Game::instance().alarm_ring();
 	//Game::instance().stop_alarm();

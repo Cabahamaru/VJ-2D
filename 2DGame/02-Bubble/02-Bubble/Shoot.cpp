@@ -83,7 +83,7 @@ void Shoot::update(int deltaTime)
 			}
 		counterShot = 0;
 	}
-	posShot.x += shotdirection.x * shootSpeed;
+	posShot.x += shotdirection.x * shootSpeed; 
 	posShot.y += shotdirection.y * shootSpeed;
 	if(hitPlayer())
 	{
