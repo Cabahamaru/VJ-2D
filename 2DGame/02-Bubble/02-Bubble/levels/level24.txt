@@ -9,17 +9,17 @@ a                a
 a                a
 a dddddddddddddd a
 a eeeeeeeeeeeeee a
-a 11114444441111da
-a 11114kkkk41111ea
+ad11114444441111da
+ae11114kkkk41111ea
 azzzzzz    zzzzzza
 a                a
 a                a
 a  111  11  111  a
-a     1    1     a
-a     1    1     a
-a  111  11  111  a
-a                a
-a                a
+a   ff1    1ff   a
+af  gg1    1gg  fa
+ag 111  11  111 ga
+aff            ffa
+agg            gga
 azzzzzzkkkkzzzzzza
 a      jjjj      a
 a                a
