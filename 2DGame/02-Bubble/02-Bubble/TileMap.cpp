@@ -427,14 +427,14 @@ bool TileMap::collisionMoveLeftBall(const glm::ivec2& pos, const glm::ivec2& siz
 		{
 			map[y * mapSize.x + x] = 21;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			Game::instance().breakhardbrick();
 			return true;
 		}
 		if (map[y * mapSize.x + x] == 23)
 		{
 			map[y * mapSize.x + x] = 22;
 			prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-			if (!Game::instance().I_AM_GOD()) Game::instance().breakhardbrick();
+			Game::instance().breakhardbrick();
 			return true;
 		}
 	}
@@ -656,7 +656,7 @@ bool TileMap::BreakBrick(int y, int x)
 {
 	map[y * mapSize.x + x] = 0;
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	if (!Game::instance().I_AM_GOD()) Game::instance().breakbrick();
+	Game::instance().breakbrick();
 	return true;
 }
 

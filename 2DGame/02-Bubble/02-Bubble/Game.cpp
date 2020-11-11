@@ -151,13 +151,13 @@ int Game::getlevel()
 
 void Game::breakhardbrick() {
 	SoundEngine->setSoundVolume(0.1f);
-	SoundEngine->play2D("sounds/block_break.mp3", false);
+	if (!GOD_MODE) SoundEngine->play2D("sounds/block_break.mp3", false);
 }
 
 void Game::breakbrick() {
 	scene.addpoints(100);
 	SoundEngine->setSoundVolume(0.1f);
-	SoundEngine->play2D("sounds/block_break.mp3", false);
+	if (!GOD_MODE) SoundEngine->play2D("sounds/block_break.mp3", false);
 }
 
 void Game::breakcoin() {
