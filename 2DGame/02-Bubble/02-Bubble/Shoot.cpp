@@ -20,7 +20,7 @@ enum ShotAnims
 
 void Shoot::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
-	shootSpeed = 1;
+	shootSpeed = 0;
 	spritesheet.loadFromFile("images/shot.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(0.125,1), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(8);
@@ -92,7 +92,7 @@ void Shoot::update(int deltaTime)
 		sprite->changeAnimation(5);
 		sprite->changeAnimation(6);
 		sprite->changeAnimation(7);
-		posShot.x = -100;
+		posShot.x = -200;
 		Game::instance().loselife();
 	}
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posShot.x), float(tileMapDispl.y + posShot.y)));
@@ -128,6 +128,10 @@ void Shoot::setShotdirection(glm::vec2 posPlayer)
 	shotdirection.y = (posPlayer.y -posShot.y)/ (posPlayer.y - posShot.y);
 	if (posPlayer.x < posShot.x)
 		shotdirection.x = -shotdirection.x;
+}
+void Shoot::setShotSpeed(int s)
+{
+	shootSpeed = 1;
 }
 
 bool Shoot::hitPlayer()

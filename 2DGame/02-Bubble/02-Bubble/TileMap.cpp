@@ -675,6 +675,22 @@ bool TileMap::ColissionWithKey(int y, int x)
 	map[8] = 0;
 	map[9] = 0;
 	map[10] = 0;
+	if(Game::instance().getlevel() == 1 && Game::instance().getCurrentRoom()==1)
+	{
+		map[6] = 0;
+		map[11] = 0;
+	}
+	if (Game::instance().getlevel() == 1 && Game::instance().getCurrentRoom() == 0) 
+	{
+		map[6] = 0;
+		map[11] = 0;
+	
+	}
+	if (Game::instance().getlevel() == 2 && Game::instance().getCurrentRoom() == 1 )
+	{
+		map[6] = 0;
+		map[11] = 0;
+	}
 	Game::instance().catch_key();
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	return true;
@@ -694,7 +710,7 @@ bool TileMap::ColissionWithAlarm(int y, int x)
 	map[y * mapSize.x + x] = 0;
 	Alarm = true;
 	Game::instance().alarm_ring();
-	Game::instance().stop_alarm();
+	//Game::instance().stop_alarm();
 	prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	return true;
 }

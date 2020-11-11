@@ -27,6 +27,8 @@ void Boss::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 	bossLives = 8;
 	counter = 0;
 	current = 0;
+	int shotcounter = 200;
+	int bossdirection = 0;
 	statenormal = true;
 	staterage = false;
 	spritesheet.loadFromFile("images/boss.png", TEXTURE_PIXEL_FORMAT_RGBA);
@@ -137,6 +139,7 @@ void Boss::update(int deltaTime)
 		glm::vec2 posPlayer = player->getPosition();
 		shot->setShotdirection(posPlayer);
 		shotcounter = 0;
+		//shot->render();
 	}
 
 }

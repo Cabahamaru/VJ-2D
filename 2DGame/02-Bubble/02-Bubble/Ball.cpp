@@ -16,7 +16,7 @@ glm::vec2 direction = (glm::vec2(0.6f, -1.f));
 
 void Ball::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
 {
-
+	Start = false;
 	spritesheet.loadFromFile("images/ball.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1,1), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(0);
@@ -59,15 +59,18 @@ void Ball::update(int deltaTime)
 
 		}
 		CollisionWithPlayer();
-		CollisionWithBoss();
-		
-		
-		
+		if(Game::instance().getCurrentRoom() == 4)
+			CollisionWithBoss();
 
-		if (posBall.y > 425) {
+		if(posBall.y > 405 && Game::instance().getCurrentRoom() == 4)
+		{
+			direction.y = -direction.y;
+		}
+
+		else if (posBall.y > 425) {
 			if (Game::instance().getCurrentRoom() == 0)
 			{
-				if (Game::instance().getlevel() == 0) Game::instance().loselife();
+				Game::instance().loselife();
 				Start = false;
 			}
 			else

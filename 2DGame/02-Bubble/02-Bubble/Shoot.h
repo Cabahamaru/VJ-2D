@@ -19,6 +19,8 @@ public:
 
 	void setShotdirection(glm::vec2 posPlayer);
 
+	void setShotSpeed(int s);
+
 	bool hitPlayer();
 	
 
