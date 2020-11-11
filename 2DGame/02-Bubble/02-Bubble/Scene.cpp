@@ -59,6 +59,12 @@ void Scene::init()
 	glm::vec2 texCoords2[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	bg = TexturedQuad::createTexturedQuad(geom2, texCoords2, texProgram);
 	imgBg.loadFromFile("images/background.png", TEXTURE_PIXEL_FORMAT_RGBA);
+
+	glm::vec2 geom3[2] = { glm::vec2(50.f, 0.f), glm::vec2(480.f + 100.f, 0 + 480.f) };
+	glm::vec2 texCoords3[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
+	sc_bg = TexturedQuad::createTexturedQuad(geom3, texCoords3, texProgram);
+	imgScBg.loadFromFile("images/room_background.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	imgScBg.setMagFilter(GL_NEAREST);
 	
 	
 	if(Game::instance().getlevel() == 0)
@@ -168,6 +174,7 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	bg->render(imgBg);
+	sc_bg->render(imgScBg);
 
 	map->render();
 	map1->render();

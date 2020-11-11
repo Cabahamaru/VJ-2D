@@ -69,8 +69,8 @@ private:
 	ISoundEngine* soundEngine;
 	float currentTime;
 	glm::mat4 projection;
-	TexturedQuad* stats, *bg;
-	Texture imgStats, imgBg;
+	TexturedQuad* stats, *bg, *sc_bg;
+	Texture imgStats, imgBg, imgScBg;
 	bool Alarm;
 	unsigned char* strpoints;
 
