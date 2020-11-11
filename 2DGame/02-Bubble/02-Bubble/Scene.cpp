@@ -270,6 +270,11 @@ void Scene::nextRoom()
 		ball->setTileMap(map1);
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	}
 	if(room == 2)
 	{
@@ -282,6 +287,11 @@ void Scene::nextRoom()
 		ball->setTileMap(map2);
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	
 	}
 	if (room == 3)
@@ -295,6 +305,11 @@ void Scene::nextRoom()
 		ball->setTileMap(map3);
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, 400));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	}
 	if (room == 4)
 	{
@@ -320,6 +335,11 @@ void Scene::nextRoom()
 			boss->setShot(shot);
 			ball->setBoss(boss);
 			boss->setbossdirection(1);
+			map->setAlarmStatus(false);
+			map1->setAlarmStatus(false);
+			map2->setAlarmStatus(false);
+			map3->setAlarmStatus(false);
+			guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		}
 		else room--;
 	
@@ -340,6 +360,11 @@ void Scene::previousRoom()
 		ball->setTileMap(map);
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	}
 	if (room == 1)
 	{
@@ -352,6 +377,11 @@ void Scene::previousRoom()
 		ball->setTileMap(map1);
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	}
 	if (room == 2)
 	{
@@ -364,6 +394,11 @@ void Scene::previousRoom()
 		ball->setTileMap(map2);
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	}
 	if (room == 3)
 	{
@@ -377,6 +412,11 @@ void Scene::previousRoom()
 		//boss->setTileMap(map4boss);
 		ball->setPosition(glm::ivec2(ball->getPosition().x, -0));
 		boss->setPosition(glm::vec2(-200, 0));
+		map->setAlarmStatus(false);
+		map1->setAlarmStatus(false);
+		map2->setAlarmStatus(false);
+		map3->setAlarmStatus(false);
+		guard->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	}
 	
 }
