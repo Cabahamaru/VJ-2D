@@ -511,7 +511,7 @@ void Scene::GOD_next_room()
 		{
 			player->resetPlayer();
 			ball->resetBall();
-			nextRoom();
+			Game::instance().nextRoom();
 		}
 	
 	}
@@ -523,7 +523,7 @@ void Scene::GOD_next_room()
 		{
 			player->resetPlayer();
 			ball->resetBall();
-			nextRoom();
+			Game::instance().nextRoom();
 		}
 	}
 }

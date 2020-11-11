@@ -250,6 +250,7 @@ void Game::nextLevel()
 		SoundEngine->stopAllSounds();
 		SoundEngine->setSoundVolume(0.4f);
 		SoundEngine->play2D("sounds/level_transition.mp3", false);
+		if (GOD_MODE) GOD_MODE = !GOD_MODE;
 		nextL.setScene(scene);
 		nextL.init();
 		//scene.nextLevel();
