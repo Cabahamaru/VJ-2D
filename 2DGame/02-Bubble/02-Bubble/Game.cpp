@@ -137,13 +137,10 @@ void Game::newaction(int act)
 	else if (act == 5){
 		SoundEngine->stopAllSounds();
 		state = 0;
-		//scene.init();
 		scene.nextLevel();
 	}
 	else if (act == 6) {
-		SoundEngine->stopAllSounds();
 		state = 0;
-		//scene.init();
 		scene.nextRoom();
 	}
 }
@@ -226,8 +223,8 @@ void Game::nextRoom()
 	{
 		state = 6;
 		SoundEngine->stopAllSounds();
-		//SoundEngine->setSoundVolume(0.4f);
-		//SoundEngine->play2D("sounds/level_transition.mp3", false);
+		SoundEngine->setSoundVolume(0.3f);
+		SoundEngine->play2D("sounds/boss_music.mp3", true);
 		bossT.init();
 	}
 	else {
@@ -249,7 +246,7 @@ void Game::nextLevel()
 		state = 5;
 		SoundEngine->stopAllSounds();
 		SoundEngine->setSoundVolume(0.4f);
-		SoundEngine->play2D("sounds/level_transition.mp3", false);
+		SoundEngine->play2D("sounds/level_transition.mp3", true);
 		if (GOD_MODE) GOD_MODE = !GOD_MODE;
 		nextL.setScene(scene);
 		nextL.init();

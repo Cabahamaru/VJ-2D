@@ -72,6 +72,8 @@ void BossTransition::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	fondo->render(imgFondo);
+	text.render("You feel an EVIL presence watching you...", glm::vec2(50, 520), 32, glm::vec4(1, 1, 1, 1));
+	text.render("Press ENTER when you're ready...", glm::vec2(140, 620), 32, glm::vec4(1, 1, 1, 1));
 }
 
 void BossTransition::initShaders()
