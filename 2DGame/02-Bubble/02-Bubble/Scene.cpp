@@ -175,6 +175,17 @@ void Scene::update(int deltaTime)
 	}
 	if (room == 4)
 		shot->update(deltaTime);
+
+	
+	if (Game::instance().getlevel() == 0 && getmoney() == 2800) Game::instance().nextLevel();
+	else if (Game::instance().getlevel() == 1) {
+		if (getmoney() == 5000) Game::instance().nextLevel();
+		//else if (GOD_MODE && scene.getmoney() >= 2200) nextLevel();
+	}
+	else if (Game::instance().getlevel() == 2) {
+		if (getmoney() == 8600) Game::instance().nextLevel();
+		//else if (GOD_MODE && scene.getmoney() >= 3600) nextRoom();
+	}
 }
 
 

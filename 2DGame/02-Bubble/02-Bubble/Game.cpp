@@ -194,30 +194,12 @@ void Game::breakcoin() {
 	scene.addmoney(100);
 	SoundEngine->setSoundVolume(0.1f);
 	if (!GOD_MODE) SoundEngine->play2D("sounds/coin.mp3", false);
-	if (level == 0 && scene.getmoney() == 2800) nextLevel();
-	else if (level == 1) {
-		if (scene.getmoney() == 5000) nextLevel();
-		//else if (GOD_MODE && scene.getmoney() >= 2200) nextLevel();
-	}
-	else if (level == 2) {
-		if (scene.getmoney() == 8600) nextRoom();
-		//else if (GOD_MODE && scene.getmoney() >= 3600) nextRoom();
-	}
 }
 
 void Game::breakbag() {
 	scene.addmoney(200);
 	SoundEngine->setSoundVolume(0.2f);
 	if (!GOD_MODE) SoundEngine->play2D("sounds/bagcoins.mp3", false);
-	if (level == 0 && scene.getmoney() == 2800) nextLevel();
-	else if (level == 1) {
-		if (scene.getmoney() == 5000) nextLevel();
-		//if (GOD_MODE && scene.getmoney() >= 2200) nextLevel();
-	}
-	else if (level == 2) {
-		if (scene.getmoney() == 8600) nextRoom();
-		//if (GOD_MODE && scene.getmoney() >= 3600) nextRoom();
-	}
 }
 
 void Game::alarm_ring() {
@@ -285,7 +267,6 @@ void Game::previousLevel()
 bool Game::I_AM_GOD() {
 	return GOD_MODE;
 }
-
 
 
 
