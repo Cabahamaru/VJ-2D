@@ -66,7 +66,10 @@ void Game::keyPressed(int key)
 	if (GOD_MODE && key == 'k') scene.GOD_get_key();
 	if (GOD_MODE && key == 'b') scene.GOD_break_bricks();
 	if (GOD_MODE && key == 'n') scene.GOD_next_room();
-	if (GOD_MODE && key == 'p') scene.GOD_previous_room();
+	if (GOD_MODE && key == 'p') {
+		SoundEngine->stopAllSounds();
+		scene.GOD_previous_room();
+	}
 	if (GOD_MODE && key == 'l') nextLevel();
 	if (GOD_MODE && key == 'j') previousLevel();
 	if (GOD_MODE && key == 'm') scene.GOD_get_money();
@@ -186,8 +189,8 @@ void Game::breakbrick() {
 }
 
 void Game::soundwithwall(){
-	SoundEngine->setSoundVolume(0.1f);
-	SoundEngine->play2D("sounds/block_break.mp3", false);
+	//SoundEngine->setSoundVolume(0.3f);
+	//SoundEngine->play2D("sounds/block_break.mp3", false);
 }
 
 void Game::breakcoin() {
