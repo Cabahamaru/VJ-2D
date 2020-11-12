@@ -23,11 +23,11 @@ a                a
 a                a
 a                a
 a                a
-a  z    zz    z  a
-a                a
+a  k    kk    k  a
 a                a
 a                a
 a                a
 a 1 1       1 1  a
+a  1         1   a
 a  1         1   a
 aaaaaa      aaaaaa

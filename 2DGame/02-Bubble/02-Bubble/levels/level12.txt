@@ -10,14 +10,14 @@ a     1i1i1i     a
 a                a
 a                a
 a                a
-a     ziiiiz     a
-a     z1111z     a
-a     z    z     a
-a   1hz    zh1   a
-a     z3333z     a
-a     z533hz     a
-a     z7  hz     a
-a     z1zz1z     a
+a    ziiiiiiz    a
+a    z111111z    a
+a    z      z    a
+a  1hz      zh1  a
+a    z333333z    a
+a    z5h333hz    a
+a    z7h   hz    a
+a    z11zz11z    a
 a                a
 a                a
 a                a

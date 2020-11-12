@@ -7,18 +7,18 @@ aaaaaaaaaaaaaaaaaa
 a                a
 a                a
 a                a
-a   z        z   a
-a    z      z    a
-a     z    z     a
+a   j        j   a
+a    j      j    a
+a     j    j     a
 a     5          a
 a     73333      a
 a      3333      a
-a     z    z     a
-a    z      z    a
-a   z        z   a
-a  z          z  a
-a z            z a
-az              za
+a     j    j     a
+a    j      j    a
+a   j        j   a
+a  j          j  a
+a j            j a
+aj              ja
 a                a
 a                a
 a                a

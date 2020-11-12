@@ -163,7 +163,7 @@ int Game::getCurrentRoom() {
 
 void Game::loselife() {
 	if (!GOD_MODE) {
-		SoundEngine->setSoundVolume(0.1f);
+		SoundEngine->setSoundVolume(0.2f);
 		SoundEngine->play2D("sounds/lose_life.mp3", false);
 		scene.loselife();
 	}
