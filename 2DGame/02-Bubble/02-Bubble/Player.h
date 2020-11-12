@@ -24,6 +24,8 @@ public:
 	glm::ivec2 getPosition();
 
 	void resetPlayer();
+
+	void die();
 	
 private:
 	bool bJumping;

@@ -13,9 +13,11 @@
 #define FALL_STEP 4
 
 
+int currentTime;
+
 enum PlayerAnims
 {
-	MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT
+	MOVE_UP, MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, DIE
 };
 
 
@@ -23,14 +25,14 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
 	spritesheet.loadFromFile("images/platform.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(48, 48), glm::vec2(0.5,0.5), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(4);
+	sprite = Sprite::createSprite(glm::ivec2(48, 48), glm::vec2(0.333,0.5), &spritesheet, &shaderProgram);
+	sprite->setNumberAnimations(5);
 	
 		sprite->setAnimationSpeed(MOVE_UP, 8);
 		sprite->addKeyframe(MOVE_UP, glm::vec2(0.f, 0.f));
 		
 		sprite->setAnimationSpeed(MOVE_DOWN, 8);
-		sprite->addKeyframe(MOVE_DOWN, glm::vec2(0.5f, 0.f));
+		sprite->addKeyframe(MOVE_DOWN, glm::vec2(0.333f, 0.f));
 		
 		sprite->setAnimationSpeed(MOVE_LEFT, 8);
 		sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.f, 0.5f));
@@ -38,9 +40,12 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 		sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.f, 0.5f));*/
 		
 		sprite->setAnimationSpeed(MOVE_RIGHT, 8);
-		sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.5f, 0.5f));
+		sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.333f, 0.5f));
 		/*sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.25, 0.25f));
 		sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.25, 0.5f));*/
+		
+		sprite->setAnimationSpeed(DIE, 8);
+		sprite->addKeyframe(DIE, glm::vec2(0.666f, 0.f));
 		
 	sprite->changeAnimation(0);
 	tileMapDispl = tileMapPos;
@@ -50,6 +55,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void Player::update(int deltaTime)
 {
+	currentTime = deltaTime;
 	sprite->update(deltaTime);
 	if(Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
@@ -172,6 +178,11 @@ void Player::resetPlayer()
 {
 	posPlayer = glm::vec2(INIT_PLAYER_X_TILES * 32, INIT_PLAYER_Y_TILES * 32);
 	sprite->setPosition(glm::vec2(INIT_PLAYER_X_TILES * 32, INIT_PLAYER_Y_TILES * 32));
+}
+
+void Player::die() 
+{	
+	sprite->changeAnimation(DIE);
 }
 
 

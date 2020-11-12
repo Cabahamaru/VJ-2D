@@ -446,6 +446,7 @@ void Scene::loselife() {
 			if(Game::instance().getlevel()==2 && room == 4)
 			{
 				--lives;
+				player->die();
 			}
 			else{
 				player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
@@ -456,6 +457,7 @@ void Scene::loselife() {
 				map2->setAlarmStatus(false);
 				map3->setAlarmStatus(false);
 				--lives;
+				player->die();
 			}
 		}
 		else {
