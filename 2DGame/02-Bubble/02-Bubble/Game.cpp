@@ -124,6 +124,7 @@ void Game::newaction(int act)
 
 	state = act;
 	if (act == 3) { //pantalla de menu
+		level = 0;
 		menu.init();
 	}
 	else if (act == 0) { //jugar
@@ -156,6 +157,8 @@ void Game::newaction(int act)
 	else if (act == 7) {
 		state = 7;
 		SoundEngine->stopAllSounds();
+		SoundEngine->setSoundVolume(0.2f);
+		SoundEngine->play2D("sounds/win.mp3", false);
 		win.init();
 	}
 }
@@ -271,6 +274,12 @@ bool Game::I_AM_GOD() {
 	return GOD_MODE;
 }
 
+void Game::setSound()
+{
+	SoundEngine->stopAllSounds();
+	SoundEngine->setSoundVolume(0.5f);
+	SoundEngine->play2D("sounds/avengers-theme-8-bit", false);
+}
 
 
 

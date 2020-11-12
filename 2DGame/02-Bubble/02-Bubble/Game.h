@@ -66,6 +66,8 @@ public:
 	void nextRoom();
 	bool I_AM_GOD();
 
+	void setSound();
+
 	void previousRoom();
 
 	void nextLevel();

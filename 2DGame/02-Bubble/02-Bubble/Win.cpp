@@ -40,6 +40,7 @@ void Win::update(int deltaTime)
 	currentTime += deltaTime;
 
 	if (Game::instance().getKey(13)) {
+		Game::instance().setSound();
 		Game::instance().keyReleased(13);
 		Game::instance().newaction(3);
 	}
